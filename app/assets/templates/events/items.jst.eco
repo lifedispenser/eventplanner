@@ -1,0 +1,12 @@
+<table class="eptable" id="items-table">
+	<tr>
+		<th>Description:</th>
+		<th>Result/Summary:</th>
+		<th>Person in Charge:</th>
+		<th>Should be Completed by:</th>
+		<th>Status</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+</table>

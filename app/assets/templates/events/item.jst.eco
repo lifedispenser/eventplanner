@@ -1,0 +1,9 @@
+<td class="edit-cell"><span class="val"><%= @description %></span></td>
+<td class="edit-cell"><span class="val"><%= @result %></span></td>
+<td class="edit-cell"><span class="val"><%= @person_in_charge %></span></td>
+<td class="edit-cell"><span class="val"><%= @completed_by %></span></td>
+<td class="edit-cell"><span class="val"><%= @status %></span></td>
+
+<td><a href="#/<%= @id %>">Show</td>
+<td><a href="#/<%= @id %>/edit">Edit</td>
+<td><a href="#/<%= @id %>/destroy" class="destroy">Destroy</a></td>

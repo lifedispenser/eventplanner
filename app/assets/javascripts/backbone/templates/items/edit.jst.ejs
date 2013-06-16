@@ -1,0 +1,45 @@
+<h1>Edit item</h1>
+
+<form id="edit-item" name="item">
+  <div class="field">
+    <label for="description"> description:</label>
+    <input type="text" name="description" id="description" value="<%= description %>" >
+  </div>
+
+  <div class="field">
+    <label for="result"> result:</label>
+    <input type="text" name="result" id="result" value="<%= result %>" >
+  </div>
+
+  <div class="field">
+    <label for="completed_by"> completed_by:</label>
+    <input type="text" name="completed_by" id="completed_by" value="<%= completed_by %>" >
+  </div>
+
+  <div class="field">
+    <label for="days_before"> days_before:</label>
+    <input type="text" name="days_before" id="days_before" value="<%= days_before %>" >
+  </div>
+
+  <div class="field">
+    <label for="parent"> parent:</label>
+    <input type="text" name="parent" id="parent" value="<%= parent %>" >
+  </div>
+
+  <div class="field">
+    <label for="person_in_charge"> person_in_charge:</label>
+    <input type="text" name="person_in_charge" id="person_in_charge" value="<%= person_in_charge %>" >
+  </div>
+
+  <div class="field">
+    <label for="status"> status:</label>
+    <input type="text" name="status" id="status" value="<%= status %>" >
+  </div>
+
+  <div class="actions">
+    <input type="submit" value="Update Items" />
+  </div>
+
+</form>
+
+<a href="#/index">Back</a>

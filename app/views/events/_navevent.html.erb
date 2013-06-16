@@ -1,0 +1,18 @@
+<div class="row">  
+  <div class="offset1 span5">
+    <table class="eptable header">
+      <tr class="shade3">
+        <td class="leadin">Title:</td>
+        <td class="main"><%= @event.name %></td>
+      </tr>
+      <tr class="shade3">
+        <td class="leadin">Due date:</td>
+        <td class="main"><%= @event.date.strftime("%B %e, %Y") %></td>
+      </tr>
+      <tr class="shade2">
+        <td class="leadin">Today:</td>
+        <td class="sub"><%= Date.today.strftime("%B %e, %Y") %></td>
+      </tr>
+    </table>
+  </div>
+  

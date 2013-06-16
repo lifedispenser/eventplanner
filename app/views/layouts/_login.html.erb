@@ -1,0 +1,34 @@
+  <div class="offset1 span3" id="section-login">
+    <table class="eptable login"> 
+      <% if user_signed_in? %>
+      <tr class="shade1">
+        <td class="leadin">Logged in as:</td>
+        <td class="sub"><%= current_user.email %></td>
+      </tr>
+      <tr class="shade1">
+        <td class="leadin">Actions:</td>
+        <td class="sub">
+          <%= link_to 'Edit account', edit_user_registration_path %> |
+          <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+        </td>
+      </tr>
+      <% else %>
+      <%= form_for("user", :url => user_session_path) do |f| %>
+      <tr class="shade3">
+        <td class="leadin">Email:</td>
+        <td class="main"><%= f.text_field :email %></td>
+      </tr>
+      <tr class="shade3">
+        <td class="leadin">Password:</td>
+        <td class="main"><%= f.password_field :password %></td>
+      </tr>
+      <tr class="shade2">
+        <td class="leadin"><%= link_to 'Sign up', new_user_registration_path %> </td>
+        <td><%= f.button 'Sign in', :class => "btn btn-mini" %>
+          <%= f.check_box :remember_me %> Remember me
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>

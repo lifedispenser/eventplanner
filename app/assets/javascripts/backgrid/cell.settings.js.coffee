@@ -1,0 +1,84 @@
+class Backgrid.SettingsCell extends Backgrid.Cell
+
+  events:
+    "click" : "openMenu"
+    "click .deleteRow" : "deleteRow"
+    "click .insertRowAbove" : "insertRowAbove"
+    "click .insertRowBelow" : "insertRowBelow"
+    "click .indentRow" : "indentRow"
+    "click .unIndentRow" : "unIndentRow"
+
+
+  render: ->
+    @$el.empty()
+    @$el.attr("model_id", @model.get("id"))
+    @$el.addClass("settings")
+    indent = ""
+    indent = "&nbsp;|&nbsp; <a class='indentRow'>Indent</a></li>" if @model.collection.indexOf(@model) != 0
+    indent = "&nbsp;|&nbsp; <a class='unIndentRow'>UnIndent</a></li>" if _.isNumber(@model.get("parent_id"))
+    ul = $("
+      <ul class='menu-settings ui-menu'> 
+        <li><a class='insertRowAbove'>Insert Row Above</a></li>
+        <li><a class='deleteRow'>Delete</a> " + 
+        indent +
+        "<li><a class='insertRowBelow'>Insert Row Below</a></li>
+      </ul>
+    ")
+    @$el.append(ul)
+    $(document).on("click", @closeMenu)
+    @delegateEvents();
+    return this
+
+  openMenu: (e) ->
+    $(".menu-settings").hide()
+    menu = $(e.target).find(".menu-settings")
+    menu.css("top", "-" + (menu.height() - $(e.target).height())/2 + "px")
+    menu.show()
+    that = this
+
+  closeMenu: (e) ->
+    $(".menu-settings").hide() if !($(e.target).hasClass("menu-settings") or $(e.target).parents(".menu-settings").length > 0 or $(e.target).children(".menu-settings").length > 0)
+
+
+  deleteRow: (e) ->
+    @model.destroy() if (window.confirm("Are you sure you want to delete this event?"))
+    @$el.trigger("saveAndRefresh")
+
+  insertRowBelow: (e) ->
+    model = @addNewRow()
+    index = @model.collection.indexOf(@model) + 1
+    @model.collection.once("sync", () ->
+      @.model.collection.move(model, index)
+      @$el.trigger("saveAndRefresh")  
+    , this)
+
+  insertRowAbove: (e) ->
+    model = @addNewRow()
+    index = @model.collection.indexOf(@model)
+    @model.collection.once("sync", () ->
+      @.model.collection.move(model, index)
+      @$el.trigger("saveAndRefresh")  
+    , this)
+
+  addNewRow: () ->
+    model = @model.collection.create({
+      event_id: @model.collection.event.get('id')
+    }, {wait: true})
+    return model
+
+  indentRow: (e) ->
+    index = @model.collection.indexOf(@model)
+    for parent in @model.collection.models by -1
+      if parent.get("parent_id") == null
+        @$el.find(".indentRow").removeClass("indentRow").addClass("unIndentRow").text("UnIndent")
+        @model.set({parent_id: parent.get("id")})
+        @model.save()
+        @model.trigger("hasclass:refresh")
+        break
+
+  unIndentRow: (e) ->
+    @$el.find(".unIndentRow").removeClass("unIndentRow").addClass("indentRow").text("Indent")
+    @model.set({parent_id: null })
+    @model.save()
+    @model.trigger("hasclass:refresh")
+    

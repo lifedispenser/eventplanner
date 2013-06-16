@@ -1,0 +1,27 @@
+.jColResizer {
+	width:1170px;
+}
+
+.grip{
+	width:20px;
+	height:30px;
+	margin-top:-3px;
+	background-image:url('images/grip.png');
+	margin-left:-5px;
+	position:relative;
+	z-index:88;
+	cursor:e-resize;
+}
+
+.grip:hover{
+	background-position-x:-20px;
+}
+
+.dragging .grip{
+	background-position-x:-40px;
+}
+
+.dotted{
+	background-image:url('../images/dotted.png');
+	background-repeat:repeat-y;
+}

@@ -1,0 +1,35 @@
+<header>
+  <div class="header">
+    <%= render "navevent" %>
+    <%= render "/layouts/login" %>
+  </div>
+  <%= render 'layouts/messages' %>
+</header>
+<br>
+<div class="container content">
+  <table id="items-table">
+    <tr>
+      <th>Item</th>
+      <th>Result/Summary</th>
+      <th>Person in Charge:</th>
+      <th>Should be Completed By:</th>
+      <th>Status</th>
+    </tr>
+    <tr class="new">
+      <td>+ New item</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% @event.items.each do |item| %>
+      <tr>
+        <td><%= item.description %></td>
+        <td><%= item.result %></td>
+        <td><%= item.person_in_charge %></td>
+        <td><%= item.completed_by %></td>
+        <td><%= item.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

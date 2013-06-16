@@ -1,0 +1,321 @@
+ 
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "bootstrap/variables"; // Modify this for custom colors, font-sizes, etc
+@import "bootstrap/mixins";
+
+// CSS Reset
+@import "bootstrap/reset";
+// Grid system and page structure
+@import "bootstrap/scaffolding";
+@import "bootstrap/grid";
+@import "bootstrap/layouts";
+@import "bootstrap-responsive";
+@import "bootstrap/type";
+@import "bootstrap/code";
+@import "bootstrap/tables";
+
+body {
+  font-family: "Calibri";
+  font-size:16px;
+}
+td.string-cell {
+  position:relative;
+}
+p.dragger {
+  display:none;
+  position:absolute;
+  top:0;
+  left:1px;
+  margin: 1px 10px 0px 0px;
+  width:12px;
+  cursor:move;
+  height:100%;
+}
+p.dragger:before {
+  content:"";
+  position:absolute;
+  height:inherit;
+  left:0px;
+  width:1px;
+  border:1px dotted rgba(0,0,0,.3);
+  border-width: 0px 1px;
+}
+
+tr:hover p.dragger {
+  display:block;
+}
+
+.slick-cell input, .slick-cell select {
+  height: 20px;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  position: relative;
+  top: -1px;
+}
+
+table.backgrid {
+  tr + tr.child {
+
+  }
+
+  .email {
+    font-style: italic;
+    font-size:80%;
+  }
+  tr.pending {
+    background-color:#E26B0A;
+    color:white;
+    td {
+      background-color:#E26B0A;
+      border-color:#E26B0A;
+      color:white;
+      input {
+        color:white;
+      }
+    }
+  }
+  tr.overdue {
+    background-color:#C0504D;
+    color:white;
+    td {
+      background-color:#C0504D;
+      border-color:#C0504D;
+      color:white;
+      input {
+        color:white;
+      }
+
+    }
+  }
+  tr.completed {
+    background-color:#76933C;
+    color:white;
+    td {
+      background-color:#76933C;
+      border-color: #76933C;
+      color:white;
+      input {
+        color:white;
+      }
+
+    }
+  }
+  td.settings {
+    position:relative;
+    text-align:center;
+    text-indent: 0;
+    overflow:visible;
+    background: url('101.png') center no-repeat;
+    .menu-settings {
+      position:absolute;
+      right:-6px;
+      width:130px;
+      color:black;
+      display:none;
+      border:1px solid rgb(160,160,160);
+      background-color: white;
+      z-index: 10001;
+    }
+  }
+
+  td.settings:hover {
+    border:1px solid #999;
+    background-color: rgba(0,0,0,.06)!important;
+    cursor:pointer;
+  }
+
+  tr.overdue, tr.pending, tr.completed {
+    p.dragger {
+      left:0px;
+    }
+    p.dragger:before {
+      border:1px dotted white;
+    }
+    td.settings {
+      background-image: url('101w.png')!important;
+    }
+    td.settings:hover {
+      border:1px solid #666;
+      background-color: rgba(255,255,255,.06)!important;
+
+    }
+  } 
+  tr.parent {
+    background-color: #EEE;
+    td {
+      background-color: #EEE;
+      border-color: #DDDDDD;
+      color:black;
+    }
+    td.settings {
+      background-image: url('101.png')!important; 
+    }
+    font-weight: bold; 
+  }
+  tr.child{
+    td:first-child {
+      text-indent:30px!important;
+    }
+  }
+}
+
+table.eptable {
+  .val {
+    margin: 3px 20px;
+  }
+  input {
+    border-radius: 0;
+    -moz-border-radius: 0;
+    padding:0 1%;
+    width:97%;
+    height:100%;
+    border:3px solid black;
+  }
+  td {
+    min-width: 50px;
+  }
+  td.leadin {
+    font-size: 12px;
+    min-width: 50px;
+    text-align: right;
+    padding:3px 20px;
+  }
+  td.main {
+    min-width: 200px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+  }
+  td.sub {
+    min-width: 280px;
+    font-size: 14px;
+    padding:4px;
+    text-align: center;
+  }
+  tr {
+    vertical-align: middle;
+  }
+
+}
+
+table.header {
+  .shade3 {
+    background-color: rgba(0,100,0,.9);
+    color:white;
+  }
+  .shade2 {
+    background-color: rgba(0,100,0,.8);
+    color:white;
+  }
+}
+
+table.login {
+  .shade3 {
+    background-color: rgba(0,0,100,.9);
+    color:white;
+  }
+  .shade2 {
+    background-color: rgba(0,0,100,.8);
+    color:white;
+    td {
+      padding:3px 20px 3px 0;
+    }
+  }
+  .shade1 {
+    background-color: rgba(0,0,100,.7);
+    color:white;
+    td {
+      padding:3px 20px;
+    }
+    .leadin {
+      padding:3px 0px 3px 10px;
+    }
+  }
+  
+  td.main {
+    min-width: 0px;
+    padding:0;
+  }
+  td.sub {
+    min-width: 0px;
+  }
+  input {
+    margin-bottom:0;
+    padding:0;
+    width:180px;
+    margin-right:27px;
+    font-size: 12px;
+  }
+  input[type=checkbox] {
+    width:auto;
+    margin:3px 3px 3px 27px;
+  }
+}
+
+#section-body {
+  height:400px;
+}
+
+.content {
+  .row > div {
+    border: 1px solid #eeeeee;
+  }
+  #events-table, #items-table {
+    width:100%;
+    .title { text-align: center; }
+    tr {
+      padding:2px;
+      th { 
+        font-size:16px;
+        color: #187218;
+        font-weight: bold;
+      }
+      td, th {
+        text-align: left;  
+        border: 1px solid #eeeeee;
+        padding:2px;
+      }
+    }
+
+  }
+}
+
+.brand {
+  float: left;
+  padding-right: 8px;
+}
+ul.nav {
+  list-style: none;
+  margin: 0 0 2em;
+  padding: 0;
+}
+ul.nav li {
+  display: inline;
+}
+#flash_notice, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+#flash_alert {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
