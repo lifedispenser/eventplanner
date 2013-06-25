@@ -1,36 +1,40 @@
-class Backgrid.hasClassRow extends Backgrid.Row
+Backgrid.Grid::insertAddRow = (text) ->
+  return @body.el.appendChild(new Backgrid.AddRow({
+    emptyText: text
+    columns: @body.columns
+    grid: this
+  }).render())
+
+class Backgrid.AddRow extends Backgrid.EmptyRow
   initialize: (options) ->
-    super (options)
-    @listenTo(@model, "backgrid:edited", @setClasses)
-    @listenTo(@model, "hasclass:refresh", @setClasses)
-    @setClasses()
+    Backgrid.requireOptions(options, ["emptyText", "columns", "grid"])
+    @grid = @options.grid
+    @emptyText = @options.emptyText
+    @columns =  @options.columns
 
-  setClasses: ->
-    @$el.removeClass()
-    #is el a parent?
-    index = @model.collection.indexOf(@model)
-    #refresh all to make sure previous parents are undone
-    if (index-1 >= 0)
-      parent = @model.collection.at(index-1)
-      parent.trigger("hasclass:refresh")
-    if (index + 1 != @model.collection.length)
-      #check if next row is a child element
-      if _.isNumber(@model.collection.at(index+1).get("parent_id")) and !_.isNumber(@model.get("parent_id"))
-        @$el.addClass("parent")
-        #check if existing was parent and refresh
-        return true
-        #ignore other visualizations like complete, pending, etc
+  events: 
+    "click": "addNewRow"
 
-    #is el a child?
-    if _.isNumber(@model.get("parent_id"))
-      @$el.addClass("child")
+  render: ->
+    @$el.empty()
 
-    #el has a status?
-    if !(@model.get("status") == "" or @model.get("status") == null)
-      @$el.addClass(@model.get('status'))
-    else if @model.get("days_before") != null
-      if @daydiff(moment(), moment(@model.collection.event.get('date'))) < @model.get('days_before')
-        @$el.addClass('overdue')
+    td = document.createElement("td");
+    
+    td.setAttribute("colspan", @columns.where({renderable:true}).length);
+    td.textContent = @emptyText;
 
-  daydiff: (first, second) ->
-    return Math.round((second-first)/(1000*60*60*24))
+    @el.setAttribute("class", "newRow");
+    @el.appendChild(td);
+
+    return @el
+
+  addNewRow: ->
+    #super hack!!!! will think about later
+    if !_.isUndefined(@grid.collection.event)
+      model = @grid.collection.create({
+        event_id: @grid.collection.event.get('id')
+      }, {wait: true})
+    else
+      model = @grid.collection.create({},{wait: true})
+    @$el.trigger("saveAndRefresh")
+    return model

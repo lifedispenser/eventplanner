@@ -1,15 +1,26 @@
-  <div class="offset1 span3" id="section-login">
+  <div class="offset1 span4" id="section-login">
     <table class="eptable login"> 
       <% if user_signed_in? %>
       <tr class="shade1">
-        <td class="leadin">Logged in as:</td>
-        <td class="sub"><%= current_user.email %></td>
+        <td colspan='2' class="login">
+          <%= current_user.email %>
+        </td>
       </tr>
       <tr class="shade1">
-        <td class="leadin">Actions:</td>
         <td class="sub">
-          <%= link_to 'Edit account', edit_user_registration_path %> |
+          <%= link_to 'Edit account', user_path(current_user) %> |
           <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+        </td>
+        <td class="actions">
+          <a href="/events">Back Home</a>
+        </td>
+      </tr>
+      <tr class="shade2">
+        <td class="save-indicator">
+          saved
+        </td>
+        <td class="actions">
+          <a href="/export">Export as Template</a>
         </td>
       </tr>
       <% else %>
@@ -20,11 +31,12 @@
       </tr>
       <tr class="shade3">
         <td class="leadin">Password:</td>
-        <td class="main"><%= f.password_field :password %></td>
+        <td class="main bot"><%= f.password_field :password %></td>
       </tr>
       <tr class="shade2">
-        <td class="leadin"><%= link_to 'Sign up', new_user_registration_path %> </td>
-        <td><%= f.button 'Sign in', :class => "btn btn-mini" %>
+        <td class="links" colspan='2'>
+          <%= link_to 'Register', new_user_registration_path %>
+          <%= f.submit 'Sign in', :class => "signin" %>
           <%= f.check_box :remember_me %> Remember me
         </td>
       </tr>

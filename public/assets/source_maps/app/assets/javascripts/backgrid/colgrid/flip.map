@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "",
+  "sourceRoot": "",
+  "sources": [
+    "/assets/source_maps/app/assets/javascripts/backgrid/colgrid/flip.coffee"
+  ],
+  "names": [],
+  "mappings": "undefinedundefinedundefinedundefined;undefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined;undefinedundefinedundefinedundefined;undefinedundefinedundefinedundefinedundefined;;undefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined;undefinedundefinedundefinedundefined;;;;;undefinedundefinedundefinedundefined;;undefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined;;undefinedundefinedundefinedundefined;;undefinedundefinedundefinedundefinedundefined,undefinedundefinedundefinedundefined;undefinedundefinedundefinedundefinedundefined"
+}

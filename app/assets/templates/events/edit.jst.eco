@@ -1,11 +1,12 @@
 <table class="eptable header">
-  <tr class="shade3">
+  <tr class="shade3" id='event_title'>
     <td class="leadin">Title:</td>
-    <td class="main edit-cell"><span class="val"><%= @event.name %></span></td>
   </tr>
-  <tr class="shade3">
+  <tr class="shade2" id="event_location">
+    <td class="leadin">Location:</td>
+  </tr>
+  <tr class="shade3" id="event_date">
     <td class="leadin">Due Date:</td>
-    <td class="main edit-cell"><span class="val"><%= moment(@event.date).format('MMMM Do YYYY') %></span></td>
   </tr>
   <tr class="shade2">
     <td class="leadin">Today:</td>

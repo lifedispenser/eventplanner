@@ -4,4 +4,10 @@ class Backgrid.sortableRow extends Backgrid.hasClassRow
 
   updateIndex: (event, index) -> 
     @model.collection.move(@model, index)
-    this.$el.trigger("saveAndRefresh")
+    if index == 0 
+      @model.set({
+        child: null
+        })
+      @model.save()
+    
+    @$el.trigger("saveAndRefresh")

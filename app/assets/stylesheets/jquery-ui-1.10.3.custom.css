@@ -88,9 +88,11 @@
 }
 .ui-autocomplete {
 	position: absolute;
+	margin-top:3px;
 	top: 0;
 	left: 0;
 	cursor: default;
+	font-size:15px;
 }
 .ui-datepicker {
 	width: 17em;
@@ -266,10 +268,13 @@
 	margin: 0;
 	display: block;
 	outline: none;
+	margin-top:4px;
+
 }
 .ui-menu .ui-menu {
 	margin-top: -3px;
 	position: absolute;
+	display: block;
 }
 .ui-menu .ui-menu-item {
 	margin: 0;
@@ -289,14 +294,20 @@
 	text-decoration: none;
 	display: block;
 	padding: 2px .4em;
-	line-height: 1.5;
 	min-height: 0; /* support: IE7 */
 	font-weight: normal;
+	text-overflow: ellipsis;
+	overflow:hidden;
+}
+.ui-menu a span.email {
+	font-style: italic;
 }
 .ui-menu .ui-menu-item a.ui-state-focus,
 .ui-menu .ui-menu-item a.ui-state-active {
 	font-weight: normal;
 	margin: -1px;
+	text-overflow: visible;
+	overflow:visible;
 }
 
 .ui-menu .ui-state-disabled {
@@ -333,11 +344,10 @@
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
-	font-size: 1.1em;
+
 }
 .ui-widget .ui-widget {
-	font-size: 1em;
+
 }
 .ui-widget input,
 .ui-widget select,
@@ -682,31 +692,6 @@
 /* Misc visuals
 ----------------------------------*/
 
-/* Corner radius */
-.ui-corner-all,
-.ui-corner-top,
-.ui-corner-left,
-.ui-corner-tl {
-	border-top-left-radius: 5px;
-}
-.ui-corner-all,
-.ui-corner-top,
-.ui-corner-right,
-.ui-corner-tr {
-	border-top-right-radius: 5px;
-}
-.ui-corner-all,
-.ui-corner-bottom,
-.ui-corner-left,
-.ui-corner-bl {
-	border-bottom-left-radius: 5px;
-}
-.ui-corner-all,
-.ui-corner-bottom,
-.ui-corner-right,
-.ui-corner-br {
-	border-bottom-right-radius: 5px;
-}
 
 /* Overlays */
 .ui-widget-overlay {

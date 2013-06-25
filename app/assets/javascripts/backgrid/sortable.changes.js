@@ -76,38 +76,26 @@ $.widget( "ui.sortable", $.ui.sortable, {
 
         this.direction = intersection === 1 ? "down" : "up";
 
-      if (this.options.tolerance === "pointer" || this._intersectsWithSides(item)) {
-        this._rearrange(event, item);
-      } else {
+        if (this.options.tolerance === "pointer" || this._intersectsWithSides(item)) {
+          this._rearrange(event, item);
+        } else {
+          break;
+        }
+
+        this._trigger("change", event, this._uiHash());
         break;
       }
-
-      this._trigger("change", event, this._uiHash());
-      break;
     }
-  }
+    /* FAILED trying to make indent through dragging
+    if(event.pageX > 60) {
 
-  if(event.pageX > 60) {
-    if (this.currentItem.prev().is("tr")) {
-      this.currentItem.addClass("child");
-      if(!this.currentItem.prev().hasClass("child")) {
-        this.currentItem.prev().addClass("parent");
+      if(this.currentItem.prev().length > 0 ) { 
+        $(event.target).parent().trigger("indent")
       }
-      $("tr.parent").each(function(ele) {
-        if (!$(this).next().hasClass("child")) {
-          $(this).removeClass("parent");
-        }
-      });
     }
-  }
-  if(event.pageX < 30) {
-    if (this.currentItem.hasClass("child")) {
-      this.currentItem.removeClass("child")
-      this.currentItem.prev().removeClass("parent")
-    }
-  }
-
-
+    if(event.pageX < 50) {
+      $(event.target).parent().trigger("indent")
+    } */
 
   this._contactContainers(event);
 

@@ -29,8 +29,12 @@ class Backgrid.AddRow extends Backgrid.EmptyRow
     return @el
 
   addNewRow: ->
-    model = @grid.collection.create({
-      event_id: @grid.collection.event.get('id')
-    }, {wait: true})
+    #super hack!!!! will think about later
+    if !_.isUndefined(@grid.collection.event)
+      model = @grid.collection.create({
+        event_id: @grid.collection.event.get('id')
+      }, {wait: true})
+    else
+      model = @grid.collection.create({},{wait: true})
     @$el.trigger("saveAndRefresh")
     return model

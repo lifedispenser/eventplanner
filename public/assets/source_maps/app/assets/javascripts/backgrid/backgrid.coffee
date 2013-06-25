@@ -62,4 +62,8 @@ class Backbone.UndoModel extends Backbone.Model
       @undo.push(model) if !options.undo
       if options and options.save is false
         return
-      model.save()
+      $(".save-indicator").text("saving...")
+      model.save(null, {
+        success: (e) ->
+          $(".save-indicator").text("saved - " + moment().calendar())
+        })

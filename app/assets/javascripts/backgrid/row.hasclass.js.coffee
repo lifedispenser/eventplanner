@@ -1,28 +1,46 @@
 class Backgrid.hasClassRow extends Backgrid.Row
+  events:
+    "indent": "indent"
+    "unindent": "unindent"
+
   initialize: (options) ->
     super (options)
-    @listenTo(@model, "backgrid:edited", @setClasses)
     @listenTo(@model, "hasclass:refresh", @setClasses)
-    @setClasses()
 
+  indent: () ->
+    console.log('hi')
+    @model.set({
+      child: 1
+      }, {silent: true})
+
+  unindent: () ->
+    @model.set({
+      child: null
+      }, {silent: true})
+    console.log('hi')
+
+  #gets called on the last row 
   setClasses: ->
     @$el.removeClass()
     #is el a parent?
     index = @model.collection.indexOf(@model)
-    #refresh all to make sure previous parents are undone
+
+    #refresh the previous rows in case of change in the child
     if (index-1 >= 0)
       parent = @model.collection.at(index-1)
       parent.trigger("hasclass:refresh")
+
+    #refresh all to make sure previous parents are undone
     if (index + 1 != @model.collection.length)
       #check if next row is a child element
-      if _.isNumber(@model.collection.at(index+1).get("parent_id")) and !_.isNumber(@model.get("parent_id"))
+      if _.isNumber(@model.collection.at(index+1).get("child")) and !_.isNumber(@model.get("child"))
         @$el.addClass("parent")
         #check if existing was parent and refresh
         return true
         #ignore other visualizations like complete, pending, etc
 
     #is el a child?
-    if _.isNumber(@model.get("parent_id"))
+    if _.isNumber(@model.get("child"))
       @$el.addClass("child")
 
     #el has a status?

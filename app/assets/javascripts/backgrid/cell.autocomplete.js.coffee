@@ -40,7 +40,10 @@ class Backgrid.AutoCompleteEditor extends Backgrid.CellEditor
 
     @$el.autocomplete({
       minLength: 2
-      source: Eventplanner.contacts
+      source: (request, response) ->
+        results = $.ui.autocomplete.filter(Eventplanner.contacts, request.term)
+        response(results.slice(0, 10))
+
       focus: (event, ui) -> 
         $(event.target).val(ui.item.label)
         return false
@@ -55,10 +58,12 @@ class Backgrid.AutoCompleteEditor extends Backgrid.CellEditor
         return false
 
       })
-    .data( "ui-autocomplete" )
-    ._renderItem = ( ul, item ) ->
+    @$el.data( "ui-autocomplete" )._resizeMenu = () ->
+      ul = @menu.element
+      ul.outerWidth(@element.outerWidth())
+    @$el.data( "ui-autocomplete" )._renderItem = ( ul, item ) ->
       return $( "<li>" )
-      .append( "<a>" + item.label + "<br>" + item.email + "</a>" )
+      .append( "<a>" + item.label + "<br><span class='email'>" + item.email + "</span></a>" )
       .appendTo( ul )
     @$el.select()
     return this
@@ -67,15 +72,14 @@ class Backgrid.AutoCompleteEditor extends Backgrid.CellEditor
     command = new Backgrid.Command(e)
     newValue = @formatter.toRaw(@$el)
     @$el.autocomplete("destroy")
-    if _.isUndefined(newValue) or (e.target.value != @$el.data("complexvalue")['name'])
-      if e.target.value.length > 0
+    if e.target.value.length == 0
+      @model.set(@column.get("name"), "")
+    else if _.isUndefined(newValue) or (e.target.value != @$el.data("complexvalue")['name'])
         data = {
           name: ""
           email: e.target.value 
         }
         @model.set(@column.get("name"), JSON.stringify(data))
-      else 
-        @model.set(@column.get("name"), "")
     else 
       @model.set(@column.get("name"), newValue)
     

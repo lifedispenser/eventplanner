@@ -5,7 +5,7 @@ class Eventplanner.Views.EventItems extends Backbone.View
 
   render: ->
     #re-render it every time it gets called
-    Eventplanner.Grids['Items' + @collection.event.get('id')] = new Backgrid.Grid({
+    Eventplanner.Grids['Items' + @collection.event.get('id')] ?= new Backgrid.Grid({
       headerCell: Backgrid.Cell
       collection: @collection
       columns: @collection.model.gridColumns
@@ -18,12 +18,19 @@ class Eventplanner.Views.EventItems extends Backbone.View
     grid.insertAddRow("+ Add New Item") if @collection.length is 0
     grid.body.$el.sortable({
       handle: ".dragger"
-      containment: "parent"
       forceHelperSize: true
       forcePlaceholderSize: true
-      helper: "clone"
+      axis: 'y'
+      helper: (event, ele) ->
+        target = $(ele)
+        target_children = $(ele).children()
+        clone = target.clone()
+        clone.children().width((i,val) ->
+          return target_children.eq(i).width()
+        )
+        return clone
       placeholder: ".sort_placeholder"
-      revert: 10
+      revert: 40
       update: (e, ui) ->
         ui.item.trigger("updated_index", ui.item.index())
       })

@@ -659,6 +659,7 @@ var InputCellEditor = Backgrid.InputCellEditor = CellEditor.extend({
         model.trigger("backgrid:error", model, column, val);
       }
       else {
+        
         model.set(column.get("name"), newValue);
         model.trigger("backgrid:edited", model, column, command);
       }
@@ -2258,6 +2259,7 @@ var Body = Backgrid.Body = Backbone.View.extend({
   moveToNextCell: function (model, column, command) {
     var i = this.collection.indexOf(model);
     var j = this.columns.indexOf(column);
+
     this.rows[i].cells[j].exitEditMode();
 
     if (command.moveUp() || command.moveDown() || command.moveLeft() ||

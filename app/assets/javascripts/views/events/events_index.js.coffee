@@ -4,7 +4,7 @@ class Eventplanner.Views.EventsIndex extends Backbone.View
     @collection = @options.collection
     
   render: ->
-    Eventplanner.Grids["Events"] ?= new Backgrid.Grid({
+    Eventplanner.Grids["Events"] = new Backgrid.Grid({
       collection: @collection
       columns: @collection.model.gridColumns
     })

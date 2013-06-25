@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     result = []
     ActiveSupport::JSON.decode(self.contacts).each do |email, name|
       result.push({
-        value: email + " " + name,
+        value: name + " " + email,
         label: name,
         email: email
         })

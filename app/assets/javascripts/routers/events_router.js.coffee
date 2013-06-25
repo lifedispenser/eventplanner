@@ -20,7 +20,16 @@ class Eventplanner.Routers.Events extends Backbone.Router
   edit: (id) ->
     event = @events.get(id)
     head = new Eventplanner.Views.EventEdit(model: event)
-    $("#section-head").html(head.render())
+    head_splits = _.compact(_.pluck(head.gridColumns, "width")).join(";")
+    head_el = head.render()
+    $("#section-head").html(head_el)
+    head_el.colResizable({
+      draggingClass:"dragging"
+      liveDrag: true
+      defaultSplits: head_splits
+      headerOnly: true
+      postbackSafe: true
+    })
     
     collection = new Eventplanner.Collections.Items()
     collection.reset event.get("items")

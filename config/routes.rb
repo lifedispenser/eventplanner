@@ -1,4 +1,7 @@
 Eventplanner::Application.routes.draw do
+  resources :sections
+
+
   get 'code/:code' => 'events#eventcode'
   resources :events
   resources :items

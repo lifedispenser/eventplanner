@@ -95,7 +95,6 @@
   display: block;
   text-indent: 5px;
   width: 100%;
-  height: 100%;
   padding: 0;
   margin: 0;
   background-color: transparent;
@@ -166,7 +165,7 @@
 .backgrid .datetime-cell.editor input[type=text],
 .backgrid .number-cell.editor input[type=text],
 .backgrid .integer-cell.editor input[type=text] {
-  text-align: right;
+  text-align: left;
 }
 
 .backgrid .boolean-cell,

@@ -15,14 +15,15 @@ class Backgrid.SettingsCell extends Backgrid.Cell
     @$el.addClass("settings")
     indent = ""
     indent = "&nbsp;|&nbsp; <a class='indentRow'>Indent</a></li>" if @model.collection.indexOf(@model) != 0
-    indent = "&nbsp;|&nbsp; <a class='unIndentRow'>UnIndent</a></li>" if _.isNumber(@model.get("parent_id"))
-    ul = $("
-      <ul class='menu-settings ui-menu'> 
+    indent = "&nbsp;|&nbsp; <a class='unIndentRow'>UnIndent</a></li>" if _.isNumber(@model.get("child"))
+    ul = $("<div class='wrapper'>
+      <ul class='menu-settings ui-menu'>
         <li><a class='insertRowAbove'>Insert Row Above</a></li>
         <li><a class='deleteRow'>Delete</a> " + 
         indent +
         "<li><a class='insertRowBelow'>Insert Row Below</a></li>
       </ul>
+      </div>
     ")
     @$el.append(ul)
     $(document).on("click", @closeMenu)
@@ -30,15 +31,20 @@ class Backgrid.SettingsCell extends Backgrid.Cell
     return this
 
   openMenu: (e) ->
-    $(".menu-settings").hide()
+    $(".menu-settings").each(() ->
+      this.style.display = 'none'
+      )
     menu = $(e.target).find(".menu-settings")
-    menu.css("top", "-" + (menu.height() - $(e.target).height())/2 + "px")
-    menu.show()
+    if menu.length > 0
+      menu[0].style.top = "-" + (menu.height() - $(e.target).height())/2 + "px"
+      menu[0].style.display = 'block'
     that = this
 
   closeMenu: (e) ->
-    $(".menu-settings").hide() if !($(e.target).hasClass("menu-settings") or $(e.target).parents(".menu-settings").length > 0 or $(e.target).children(".menu-settings").length > 0)
-
+    if !($(e.target).hasClass("menu-settings") or $(e.target).parents(".menu-settings").length > 0 or $(e.target).children(".menu-settings").length > 0)
+      $(".menu-settings").each(() ->
+        this.style.display = "none" 
+      )
 
   deleteRow: (e) ->
     @model.destroy() if (window.confirm("Are you sure you want to delete this event?"))
@@ -56,7 +62,7 @@ class Backgrid.SettingsCell extends Backgrid.Cell
     model = @addNewRow()
     index = @model.collection.indexOf(@model)
     @model.collection.once("sync", () ->
-      @.model.collection.move(model, index)
+      @model.collection.move(model, index)
       @$el.trigger("saveAndRefresh")  
     , this)
 
@@ -67,18 +73,14 @@ class Backgrid.SettingsCell extends Backgrid.Cell
     return model
 
   indentRow: (e) ->
-    index = @model.collection.indexOf(@model)
-    for parent in @model.collection.models by -1
-      if parent.get("parent_id") == null
-        @$el.find(".indentRow").removeClass("indentRow").addClass("unIndentRow").text("UnIndent")
-        @model.set({parent_id: parent.get("id")})
-        @model.save()
-        @model.trigger("hasclass:refresh")
-        break
+    if(@model.collection.indexOf(@model) > 0)
+      @$el.find(".indentRow").removeClass("indentRow").addClass("unIndentRow").text("UnIndent")
+      @model.set({child: 1})
+      @model.collection.trigger("refresh:classes")
+    
 
   unIndentRow: (e) ->
     @$el.find(".unIndentRow").removeClass("unIndentRow").addClass("indentRow").text("Indent")
-    @model.set({parent_id: null })
-    @model.save()
-    @model.trigger("hasclass:refresh")
+    @model.set({child: null })
+    @model.collection.trigger("refresh:classes")
     
