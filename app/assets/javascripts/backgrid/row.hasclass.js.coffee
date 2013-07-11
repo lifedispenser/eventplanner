@@ -46,7 +46,7 @@ class Backgrid.hasClassRow extends Backgrid.Row
     #el has a status?
     if !(@model.get("status") == "" or @model.get("status") == null)
       @$el.addClass(@model.get('status'))
-    else if @model.get("days_before") != null
+    else if _.isNumber(@model.get("days_before")) and moment(@model.collection.event.get('date'))
       if @daydiff(moment(), moment(@model.collection.event.get('date'))) < @model.get('days_before')
         @$el.addClass('overdue')
 

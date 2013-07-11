@@ -2,16 +2,26 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= content_for?(:title) ? yield(:title) : "" %></title>
-  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails3 Devise Rspec Cucumber" %>">
+  <title><%= content_for?(:title) ? yield(:title) : "Event Planner" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Event Planner" %>">
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
-  <div id="events" class="container">
-    <%= yield %>
+  <div id="container" class="container">
+    <div class="header row">
+      <%= yield :header %>
+    </div>
+    <div id="main" role="main">
+      <div class="row">
+        <div class="span12"><%= render 'layouts/messages' %></div>
+      </div>
+      <%= yield %>
+    </div>
+    <footer>
+    </footer>
   </div> <!--! end of #container -->
 </body>
 </html>

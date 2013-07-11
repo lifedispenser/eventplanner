@@ -47,8 +47,9 @@ class Backgrid.SettingsCell extends Backgrid.Cell
       )
 
   deleteRow: (e) ->
-    @model.destroy() if (window.confirm("Are you sure you want to delete this event?"))
+    @model.destroy() if (window.confirm("Are you sure you want to delete this row?"))
     @$el.trigger("saveAndRefresh")
+    @model.collection.trigger("refresh:classes")
 
   insertRowBelow: (e) ->
     model = @addNewRow()

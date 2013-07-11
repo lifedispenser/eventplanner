@@ -16,8 +16,9 @@ class Backgrid.DeleteCell extends Backgrid.Cell
     return this
 
   removeEvent: (e) ->
-    @model.destroy() if (window.confirm("Are you sure you want to delete this event?"))
-    $(e.target).attr("model_id")
+    if (window.confirm("Are you sure you want to delete this event?"))
+      @model.destroy()
+    
   
 #Todo - make a better URICell!
 Backgrid.DeleteFormatter = {

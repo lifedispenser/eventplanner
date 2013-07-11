@@ -1,0 +1,36 @@
+<td class="save-indicator">
+  saved
+</td>
+<td class="actions">
+  <a class="export">Export as Template</a>
+
+  <div id="export-form" title="Export as a Template">
+    <form>
+      <input type="hidden" name='id' >
+      <table>
+        <tr>
+          <td>Template Name</td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="template_title" class="text ui-widget-content ui-corner-all" />
+          </td>
+        </tr>
+        <tr>
+          <td>Description</td>
+        </tr>
+        <tr>
+          <td>
+            <textarea name="template_desc" class="textarea ui-widget-content ui-corner-all" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <br>
+            <input type="submit" class='btn'>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</td>

@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
 
   def contacts_autocomplete
     result = []
+    return result if !self.contacts
     ActiveSupport::JSON.decode(self.contacts).each do |email, name|
       result.push({
         value: name + " " + email,

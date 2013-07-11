@@ -182,6 +182,11 @@ table.backgrid {
 }
 
 
+
+.header .logo {
+  padding: 12px 0;
+
+}
 #section-head .backgrid {
   tr th {
     background-color: rgb(0,110,0);
@@ -209,25 +214,37 @@ table.backgrid {
     }
   }
 }
+#section-head .template {
+  tr th {
+    background-color: rgb(0,0,110);
+    border: 1px solid rgb(0,0,110);
+  }
+  tr td {
+    background-color: rgb(0,0,125);
+    border: 1px solid rgb(0,0,125);
+  }
+}
+
 
 table.login {
   width:100%;
-  .shade1, .shade2, .shade3 {
-    color:white;
-  }
   .shade3 {
-    background-color: rgba(0,0,100,.9);
+    background-color: #EEE;
+    border:1px solid #aaa;
+    border-bottom:0;
+    border-top:0;
+  }
+  .shade3.last-child {
+    border-bottom:1px solid #aaa;
+  }
+  .shade3:first-child {
+    border-top:1px solid #aaa;
   }
   .shade2 {
-    background-color: rgba(0,0,100,.8);
   }
-  .shade1 {
-    background-color: rgba(0,0,100,.7);
-  }  
   td.login, td.tools {
     min-width: 0px;
     text-align:center;
-    color: rgba(255,255,255,.5);
   }
   td.tools {
     padding:4px 0;
@@ -237,7 +254,6 @@ table.login {
   }
   td.save-indicator {
     font-style: italic;
-    color: rgba(255,255,255,.4);
     font-size:12px;
   }
   td.actions {
@@ -246,10 +262,8 @@ table.login {
   }
   a {
     cursor: pointer;
-    color: rgba(255,255,255,.9);
   }
   a:hover {
-    color: rgba(255,255,255,1);
     text-decoration: underline;
   }
   .leadin{
@@ -257,15 +271,17 @@ table.login {
   }
   .main {
     padding:2px 2px 0px 2px;
-    border-right:2px solid rgba(0,0,0,.3)
   }
   .bot {
     padding-bottom: 3px;
   }
+  .links{
+    padding:4px 0 4px 12px;
+  }
   input[type='checkbox'] {
     margin-top:-2px;
   }
-  input[type='text'], input[type='password'] {
+  input[type='text'], input[type='password'], input[type='email'] {
     font-size: 13px;
     display: block;
     text-indent: 5px;
@@ -289,30 +305,20 @@ table.login {
   input:-webkit-autofill, input:-webkit-autofill:focus {
     -webkit-box-shadow:0 0 0 50px white inset !important; /* Change the color to your own background color */
     -webkit-text-fill-color: black;
-  }
-  .signin {
-    padding: 0px 9px 1px 9px;
-    margin:0 45px 0 34px;
-
-    color: white;
-    background-color: transparent;
     border:0;
-    font-family: "Calibri";
-    font-size:16px;
-    vertical-align: bottom;
+  }
+  .signin, .signup {
+    margin:0 45px 0 45px;
   }
   .signin:hover {
     text-decoration: underline;
-  }
-  .links{
-    padding:4px 0 4px 12px;
-    border-right:2px solid rgba(0,0,0,.3);
-    color:rgba(255,255,255,.8);
   }
 
 }
 #main {
   .grayed {
+    position: relative;
+    top:20px;
     background-color: rgba(0,0,0,.13);
     overflow:hidden;
     padding:20px 0 40px 0;
@@ -357,6 +363,8 @@ table.login {
 
 #section-body {
   margin-bottom:100px;
+  position: relative;
+  top: 20px;
 }
 
 .content {
@@ -406,4 +414,21 @@ ul.nav li {
 #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
+}
+
+.center {
+  text-align: center;
+}
+.float-right {
+  float:right;
+}
+
+#export-form form textarea{
+  width:260px;
+  height:80px;
+}
+
+.placeholder {
+  font-style: italic;
+  opacity: .5;
 }

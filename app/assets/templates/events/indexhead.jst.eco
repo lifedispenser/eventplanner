@@ -1,10 +1,1 @@
-<table class="eptable header">
-  <tr class="shade3">
-    <td class="leadin">Title:</td>
-    <td class="main">Events you are planning</td>
-  </tr>
-  <tr class="shade2">
-    <td class="leadin">Today:</td>
-    <td class="sub"><%= moment().format('MMMM Do YYYY') %></td>
-  </tr>
-</table>
+<img alt="Clep" src="/assets/clep.png">

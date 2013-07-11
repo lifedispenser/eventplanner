@@ -1,7 +1,3 @@
-<% content_for :header do %>
-<%= render "/layouts/navhome" %>
-<% end %>
-<br><br>
 <div class="row grayed">
   <div class="span7">
     <h2 class='banner'>Event Planner is a <span class="green">simple</span>, <span class="blue">collaborative</span>, and <span class="orange">efficient</span> tool for planning lots of events.</h2>
@@ -9,7 +5,8 @@
   <div class="span5">
     <div class="box">
       <h2>Try it out now!</h2>
-      <a href="/events" title="" class="btn btn-large btn-custom">Create a New Event.</a>
+
+<%= link_to "Create a new Event.", "/events/new_event", :class => "btn btn-large btn-custom" %>
     </div>
   </div>
 </div>

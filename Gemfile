@@ -26,10 +26,14 @@ gem 'pg'
 gem "backbone-on-rails"
 gem "devise", ">= 2.2.3"
 gem "figaro", ">= 0.5.3"
+gem "amoeba"
+gem "resque"
+gem 'resque_mailer'
 
 gem "spork-rails", :group => :test
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
 gem 'coffee-rails-source-maps', :group => :development
+gem "letter_opener", :group => :development
 gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
 gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false

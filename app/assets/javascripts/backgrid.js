@@ -752,7 +752,11 @@ var Cell = Backgrid.Cell = Backbone.View.extend({
   */
   render: function () {
     this.$el.empty();
-    this.$el.text(this.formatter.fromRaw(this.model.get(this.column.get("name"))));
+    if (this.formatter.fromRaw(this.model.get(this.column.get("name"))) == "" && this.column.get("placeholder")) {
+      this.$el.html("<span class='placeholder'>" + this.column.get("placeholder") + "</span>");
+    } else {
+      this.$el.text(this.formatter.fromRaw(this.model.get(this.column.get("name"))));
+    }
     this.delegateEvents();
     return this;
   },
@@ -1283,7 +1287,6 @@ var SelectCellEditor = Backgrid.SelectCellEditor = CellEditor.extend({
     }
 
     this.delegateEvents();
-
     return this;
   },
 

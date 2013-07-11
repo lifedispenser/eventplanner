@@ -22,12 +22,14 @@ class Eventplanner.Views.EventEdit extends Backbone.View
       name:     'name'
       label:    'Name'
       cell:     'string'
+      placeholder: 'Event Name'
       width: 50
       sortable: false
     {}= 
       name:     'location'
       label:    'Location'
       cell:     'string'
+      placeholder: 'Event Location'
       width: 25
       sortable: false
     {}= 

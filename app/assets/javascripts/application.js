@@ -11,10 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require bootstrap
 //= require jquery_ujs
 //= require jqueryui.custom
 //= require moment
-//= require bootstrap
 //= require underscore
 //= require backbone
 //= require backgrid

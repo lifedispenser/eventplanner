@@ -1,11 +1,8 @@
-<header>
-  <div class="header">
-    <%= render "navevents" %>
-    <%= render "/layouts/login" %>
-  </div>
-  <%= render 'layouts/messages' %>
-</header>
-<br>
+<% content_for :header do %>
+  <%= render "/layouts/navhome" %>
+  <%= render "/layouts/login" %>
+<% end %>  
+<%= render 'layouts/messages' %>
 <div class="container content" id="section-body">
 </div>
 
@@ -13,7 +10,10 @@
   Eventplanner.contacts = <%= @contacts.to_json.html_safe %>;
   $(function() {
     // Blog is the app name
-    window.router = new Eventplanner.Routers.Events({events: <%= @events.to_json(:include => :items).html_safe -%>});
+    window.router = new Eventplanner.Routers.Events({
+      events: <%= @events.to_json(:include => :items).html_safe -%>,
+      templates: <%= @templates.to_json(:include => :items).html_safe -%>
+    });
 
     Backbone.history.start();
   });

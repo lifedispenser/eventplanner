@@ -7,24 +7,25 @@ class Eventplanner.Models.Event extends Backbone.UndoModel
       name:     'name'
       label:    'Name'
       cell:     'string'
-      width: 36
+      placeholder: 'Event Name'
+      width: 35
     {}= 
       name:     'location'
       label:    'Location'
       cell:     'string'
-      width: 36
+      placeholder: 'Event Location'
+      width: 38
     {}= 
       name:     'date'
       label:    'Date'
       cell:     'datePicker'
-      width: 23
+      width: 20
     {}= 
       name:     'id'
-      label:    'ID'
-      cell:     'uri'
+      label:    'Edit'
+      cell:     'edit'
       editable: false
-      formatter: Backgrid.EditLinkFormatter
-      width: 3
+      width: 5
     {}= 
       name:     'x'
       label:    'X'
@@ -32,5 +33,4 @@ class Eventplanner.Models.Event extends Backbone.UndoModel
       editable: false
       formatter: Backgrid.DeleteFormatter
       width: 2
-
   ]

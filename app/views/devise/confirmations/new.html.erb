@@ -1,12 +1,26 @@
-<h2>Resend confirmation instructions</h2>
+<div class="row"><div class="span4 offset4">
+<h2>Resend confirmation code</h2>
 
 <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.submit "Resend confirmation instructions" %></div>
+<table class="login">
+  <tr class="shade3">
+    <td class="leadin">
+      <%= f.label :email %>
+    </td>
+    <td class="main">
+      <%= f.email_field :email, :autofocus => true %>
+    </td>
+  </tr>
+  <tr class="shade3 last-child">
+    <td></td>
+    <td class="links">
+      <%= f.submit "Resend confirmation instructions", :class => "btn" %>
+    </td>
+  </tr>
+</table>
 <% end %>
-
-<%= render "devise/shared/links" %>
+<br>
+<%= link_to "Back Home", "/" %>
+</div></div>

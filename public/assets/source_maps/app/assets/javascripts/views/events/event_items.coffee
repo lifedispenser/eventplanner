@@ -34,4 +34,6 @@ class Eventplanner.Views.EventItems extends Backbone.View
       update: (e, ui) ->
         ui.item.trigger("updated_index", ui.item.index())
       })
+    #fix bug where cell is still in input mode after a history back/forward
+    grid.body.saveAndRefresh() 
     return grid.$el

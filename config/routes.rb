@@ -1,8 +1,9 @@
-Eventplanner::Application.routes.draw do
-  resources :sections
-
+Eventplanner::Application.routes.draw do  
+  get 'events/new_event' => 'events#create'
 
   get 'code/:code' => 'events#eventcode'
+  post 'save_template' => 'events#save_template'
+  post 'load_template' => 'events#load_template'
   resources :events
   resources :items
 

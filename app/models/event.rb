@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :date, :location, :name, :order
+  attr_accessible :date, :location, :name, :order, :template_title, :template_desc
   
   has_many :event_users
   has_many :users, :through => :event_users
@@ -18,6 +18,8 @@ class Event < ActiveRecord::Base
     return Base64.urlsafe_encode64(string)
   end
 
-
+  amoeba do
+    include_field :items
+  end
 
 end

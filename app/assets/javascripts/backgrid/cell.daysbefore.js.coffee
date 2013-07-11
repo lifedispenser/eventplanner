@@ -19,8 +19,10 @@ class Backgrid.DaysBeforeCell extends Backgrid.IntegerCell
     @formatter = this
 
   fromRaw: (raw) ->
-    return "" if !raw
-    return moment(@model.collection.event.get("date")).subtract('days', raw).format("MMMM D, YYYY")
+    return "" if raw is null or raw is ""
+    return raw + " days before event" unless moment(this.model.collection.event.get("date"))
+    return moment(@model.collection.event.get("date")).subtract('days', parseInt(raw)).format("MMMM D, YYYY")
 
   toRaw: (data) ->
-    return data
+    return parseInt(data) unless isNaN(parseInt(data))
+    return ''

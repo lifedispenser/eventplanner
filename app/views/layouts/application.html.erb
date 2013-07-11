@@ -11,14 +11,14 @@
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
   <div id="container" class="container">
-    <header>
-      <div class="header">
-        <%= yield :header %>
+      <div class="header row">
+        <%= render "/layouts/navhome" %>
         <%= render "/layouts/login" %>
-      </div>        
-      <%= render 'layouts/messages' %>
-    </header>
+      </div>
     <div id="main" role="main">
+      <div class="row">
+        <div class="span12"><%= render 'layouts/messages' %></div>
+      </div>
       <%= yield %>
     </div>
     <footer>

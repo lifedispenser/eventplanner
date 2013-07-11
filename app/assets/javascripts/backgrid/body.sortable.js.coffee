@@ -2,7 +2,7 @@ class Backgrid.sortableBody extends Backgrid.Body
   initialize: (options) ->
     super (options)
     @listenTo(@collection, "backgrid:edited", @setClasses)
-    @listenTo(@collection, "refresh:classes", @setClasses)
+    @listenTo(@collection, "refresh:classes", @setClasses)  
     @setClasses()
 
   events: 

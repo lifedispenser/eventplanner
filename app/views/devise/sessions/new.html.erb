@@ -1,17 +1,31 @@
-<h2>Sign in</h2>
+<div class="row grayed">
+  <div class="span7">
+    <h2 class='banner'>Event Planner is a <span class="green">simple</span>, <span class="blue">collaborative</span>, and <span class="orange">efficient</span> tool for planning lots of events.</h2>
+  </div>
+  <div class="span5">
+    <div class="box">
+      <h2>Try it out now!</h2>
+      <a href="/events" title="" class="btn btn-large btn-custom">Create a New Event.</a>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="row">
+  <div class="span4">
+    <h3>Event planning under control.</h3>
+    <p>Your master list to make sure every detail of your event is taken care of.</p>
+    <%= image_tag "ep_list.png" %>    
+  </div>
+  <div class="span4">
+    <h3>Delegate and Direct.</h3>
+    <p>Assign items to people and send them email reminders with just one click.</p>
+    <%= image_tag "ep_people.png" %>
+  </div>
+  <div class="span4">
+    <h3>Built with speed in mind.</h3>
+    <p>A snappy interface, reusable templates, and minimal approach makes event planning fast, efficient and fun. </p>
+    <%= image_tag "ep_speed.png" %>
+  </div>
+</div>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<br><br><br>

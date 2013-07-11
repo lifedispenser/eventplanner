@@ -44,12 +44,8 @@ class ItemsController < ApplicationController
     params[:item].delete :event_id
     event = Event.find(event_id)
     @item = Item.new(params[:item])
-
-    if !event.nil?
-      if current_user == event.owner
-        @item.event = event
-      end
-    end
+    @item.event = event
+    
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'item was successfully created.' }

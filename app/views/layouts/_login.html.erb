@@ -1,12 +1,12 @@
   <div class="offset1 span4" id="section-login">
     <table class="eptable login"> 
       <% if user_signed_in? %>
-      <tr class="shade1">
+      <tr class="shade3">
         <td colspan='2' class="login">
           <%= current_user.email %>
         </td>
       </tr>
-      <tr class="shade1">
+      <tr class="shade3 last-child">
         <td class="sub">
           <%= link_to 'Edit account', user_path(current_user) %> |
           <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
@@ -15,13 +15,7 @@
           <a href="/events">Back Home</a>
         </td>
       </tr>
-      <tr class="shade2">
-        <td class="save-indicator">
-          saved
-        </td>
-        <td class="actions">
-          <a href="/export">Export as Template</a>
-        </td>
+      <tr class="shade2" id="section-tools">
       </tr>
       <% else %>
       <%= form_for("user", :url => user_session_path) do |f| %>
@@ -29,14 +23,14 @@
         <td class="leadin">Email:</td>
         <td class="main"><%= f.text_field :email %></td>
       </tr>
-      <tr class="shade3">
+      <tr class="shade3 last-child">
         <td class="leadin">Password:</td>
         <td class="main bot"><%= f.password_field :password %></td>
       </tr>
       <tr class="shade2">
         <td class="links" colspan='2'>
           <%= link_to 'Register', new_user_registration_path %>
-          <%= f.submit 'Sign in', :class => "signin" %>
+          <%= f.submit 'Sign in', :class => "btn signin" %>
           <%= f.check_box :remember_me %> Remember me
         </td>
       </tr>
