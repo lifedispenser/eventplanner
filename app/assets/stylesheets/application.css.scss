@@ -321,7 +321,7 @@ table.login {
     top:20px;
     background-color: rgba(0,0,0,.13);
     overflow:hidden;
-    padding:20px 0 40px 0;
+    padding:20px 0 30px 0;
 
   }
   .banner {
@@ -418,6 +418,7 @@ ul.nav li {
 
 .center {
   text-align: center;
+  display:block;
 }
 .float-right {
   float:right;
@@ -431,4 +432,42 @@ ul.nav li {
 .placeholder {
   font-style: italic;
   opacity: .5;
+}
+#section-email {
+  float: right;
+  display: inline-table;
+  position: relative;
+  right: 5px;
+  background: url('101.png') center no-repeat;
+  width: 30px;
+  height:20px;
+  ul {
+    z-index: 10001;
+    position: absolute;
+    top:25px;
+    right:-5px;
+    color:black;
+    display:none;
+    border:1px solid rgb(160,160,160);
+    background-color: white;
+    list-style-type: none;
+    li {
+      a {
+        font-weight: normal;
+      }
+    }
+  }
+}
+.EPdelete {
+  font-weight:bold;
+  cursor:pointer;
+  font-size: 21px;
+  text-indent: 6px!important;
+}
+.EPdelete:hover {
+  font-weight:bold;
+  border:1px solid #999;
+}
+#loading h3 {
+  text-align:center;
 }

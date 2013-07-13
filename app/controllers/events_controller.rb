@@ -4,9 +4,10 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     if current_user 
-      @events = current_user.events(:include => :items) 
+      @user = current_user
+      @events = current_user.events(:select => 'events.*, items.*, users.name, users.email, users.id', :include => [:items, :owner]) 
       @contacts = current_user.contacts_autocomplete
-      @templates = Event.where(:template => [current_user.id, 0]).includes(:items)
+      @templates = Event.where(:template => current_user.id).includes(:items)
     else 
       session['events'] ||= []
       ids = session['events']
@@ -20,21 +21,21 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1
+  # GET /events/1 t
   # GET /events/1.json
   def show
     @event = Event.find(params[:id], :include => :items)
+    EventUser.find_or_create_by_user_id_and_event_id(current_user.id, @event.id)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @event.to_json(:include => :items) }
+      format.json { render json: @event.to_json(:include => {items: {},owner: {only: ['name','email','id']}}) }
     end
   end
 
   # GET /events/new
   # GET /events/new.json
   def new
-    create
     @event = Event.new
 
     respond_to do |format|
@@ -60,7 +61,7 @@ class EventsController < ApplicationController
           session['events'] << @event.id
         end
         format.html { redirect_to ('/events#' + @event.id.to_s) }
-        format.json { render json: @event, status: :created, location: @event }
+        format.json { render json: @event.to_json(:include => { owner: { only: ['name', 'id', 'email']}}), status: :created, location: @event }
       else
         format.html { render action: "new" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -87,8 +88,13 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
-
+    if current_user.id == @event.template
+      @event.destroy
+    elsif current_user.id == @event.owner.id
+      @event.destroy
+    else
+      @eu = EventUser.where(event_id: @event.id, user_id: current_user.id).first.destroy
+    end
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }
@@ -96,74 +102,28 @@ class EventsController < ApplicationController
   end
 
   def eventcode 
-    args = Base64.urlsafe_decode64(params[:code]).split("|zq|")
-    if args[0] != ""
+    args = Base64.urlsafe_decode64(params[:code])
+    if args != ""
       event = Event.find(args[0])
-    end
-    if args[1] != ""
-      user = User.where(
-        user_id: @user.id, 
-        role_id: 2, 
-        creator_id: current_user.id).first_or_create
     end
   end
 
   def save_template
     @event = Event.find(params[:id])
-    @event.template_title = params[:template_title]
-    @event.template_desc = params[:template_desc]
+    @template = @event.dup_as_template(current_user, params[:template_title], params[:template_desc])
 
-    @template = @event.dup
-    @template.template = current_user ? current_user.id : 0
-    @template.name = ""
-    @template.location = ""
-    @template.date = nil
-    @template.save
-
-    ids = @event.items.map { |item| item.id }
-    new_order = []
-    @event.order.split(',').each do |id|
-      new_item = @event.items.at(ids.index(id.to_i)).dup
-      new_item.event_id = @template.id
-      new_item.result = ""
-      new_item.status = ""
-      new_item.person_in_charge = ""
-      new_item.save
-      new_order.push(new_item.id)
-    end
-    @template.order = new_order.join(",")
-
-    if @template.save
-      respond_to do |format|
-        format.json { render :json => @template, :include => :items }
-      end
+    respond_to do |format|
+      format.json { render :json => @template, :include => :items }
     end
   end
 
   def load_template
     @template = Event.find(params[:id]) 
-    @event = @template.dup
-    @event.template = nil
-    @event.template_title = ""
-    @event.template_desc = ""
-    @event.owner = current_user if current_user
-    @event.save
-
-    ids = @template.items.map { |item| item.id }
-    new_order = []
-    @template.order.split(',').each do |id|
-      new_item = @template.items.at(ids.index(id.to_i)).dup
-      new_item.event_id = @event.id
-      new_item.save
-      new_order.push(new_item.id)
+    @event = @template.dup_as_event (current_user)
+    respond_to do |format|
+      format.json { render :json => @event, :include => {items: {}, owner: {only: ['name', 'email', 'id']} }}
     end
-    @event.order = new_order.join(",")
-
-    if @event.save
-      respond_to do |format|
-        format.json { render :json => @event, :include => :items }
-      end
-    end
+    
   end
 
 end

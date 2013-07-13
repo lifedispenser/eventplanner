@@ -1,14 +1,16 @@
-Backgrid.Grid::insertAddRow = (text) ->
-  return @body.el.appendChild(new Backgrid.AddRow({
+Backgrid.Body::insertAddRow = (text) ->
+  newrow = new Backgrid.AddRow({
     emptyText: text
-    columns: @body.columns
-    grid: this
-  }).render())
+    columns: @columns
+    body: this
+  })
+  @el.appendChild(newrow.render())
+  return @el
 
 class Backgrid.AddRow extends Backgrid.EmptyRow
   initialize: (options) ->
-    Backgrid.requireOptions(options, ["emptyText", "columns", "grid"])
-    @grid = @options.grid
+    Backgrid.requireOptions(options, ["emptyText", "columns", "body"])
+    @body = @options.body
     @emptyText = @options.emptyText
     @columns =  @options.columns
 
@@ -29,12 +31,14 @@ class Backgrid.AddRow extends Backgrid.EmptyRow
     return @el
 
   addNewRow: ->
-    #super hack!!!! will think about later
-    if !_.isUndefined(@grid.collection.event)
-      model = @grid.collection.create({
-        event_id: @grid.collection.event.get('id')
+    #super hack to deal with different grid types (template, items, events)!!!! will think about later
+    if !_.isUndefined(@body.collection.event)
+      model = @body.collection.create({
+        event_id: @body.collection.event.get('id')
       }, {wait: true})
     else
-      model = @grid.collection.create({},{wait: true})
-    @$el.trigger("saveAndRefresh")
+      model = @body.collection.create({},{wait: true})
+    @body.collection.once("sync", () ->
+      @body.collection.trigger("saveAndRefresh")  
+    , this)
     return model

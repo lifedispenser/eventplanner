@@ -7,6 +7,7 @@ class Eventplanner.Views.EventEdit extends Backbone.View
   render: ->
     #remove otherwise this grid will catch all the event triggers for some reason
     Eventplanner.Grids['Events'].remove() if Eventplanner.Grids['Events']
+    Eventplanner.Grids['Templates'].remove() if Eventplanner.Grids['Templates']
     Eventplanner.Grids['Event' + @model.get('id')] ?= new Backgrid.Grid({
       headerCell: Backgrid.Cell
       collection: @collection
@@ -15,6 +16,7 @@ class Eventplanner.Views.EventEdit extends Backbone.View
     grid = Eventplanner.Grids['Event' + @model.get('id')]
     grid.render()
     grid.$el.attr("id", 'Event' + @model.get('id'))
+    grid.listenTo(@model, "reset", grid.refresh)
     return grid.$el
 
   gridColumns: [

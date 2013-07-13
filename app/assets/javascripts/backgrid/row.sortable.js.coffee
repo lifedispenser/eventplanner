@@ -10,4 +10,4 @@ class Backgrid.sortableRow extends Backgrid.hasClassRow
         })
       @model.save()
     
-    @$el.trigger("saveAndRefresh")
+    @model.collection.trigger("saveAndRefresh")

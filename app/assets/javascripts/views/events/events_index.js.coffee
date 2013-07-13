@@ -8,9 +8,12 @@ class Eventplanner.Views.EventsIndex extends Backbone.View
       collection: @collection
       columns: @collection.model.gridColumns
     })
+    # avoid same collection Grid conflicts
+    _.each(Eventplanner.Grids, (grid,id) ->
+      if id.match(/Event[0-9]+/)
+        grid.remove()
+      )
     grid = Eventplanner.Grids["Events"]
     grid.render()
-    grid.insertAddRow("+ New Event")
-    
-    return grid.$el
+    return grid
 

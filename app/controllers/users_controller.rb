@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def contacts_sync
-    redirect_to GmailContacts::Google.authentication_url("http://localhost:3000/users/contacts")
+    session[:return_to] ||= params[:location]
+    redirect_to GmailContacts::Google.authentication_url(session[:return_to])
   end
 end

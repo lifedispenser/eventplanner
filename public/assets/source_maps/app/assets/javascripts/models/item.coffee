@@ -19,13 +19,13 @@ class Eventplanner.Models.Item extends Backbone.UndoModel
       name:     'person_in_charge'
       label:    'Person in Charge'
       cell:     'autoComplete'
-      width: 16
+      width: 18
       sortable: false
     {}= 
       name:     'days_before'
-      label:    'Should be Completed By'
+      label:    'Complete By'
       cell:     'daysBefore'
-      width: 14
+      width: 12
       sortable: false
     {}= 
       name:     'status'
@@ -55,7 +55,7 @@ class Eventplanner.Models.Item extends Backbone.UndoModel
       sortable: false
     {}= 
       name:     'setting'
-      label:    'XX'
+      label:    ''
       cell:     'settings'
       width: 3
       editable: false

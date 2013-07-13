@@ -30,8 +30,8 @@ class Backgrid.DatePickerEditor extends Backgrid.CellEditor
     else
       @model.set(@column.get("name"), newValue)
       @model.trigger("backgrid:edited", @model, @column, command)
-      Eventplanner.Grids["Items" + this.model.get("id")].body.saveAndRefresh()
-      Eventplanner.Grids["Items" + @model.get("id")].collection.trigger("refresh:classes")
+      #global pollution to pass things between Grids
+      Backbone.trigger("Eventplanner:refreshrowclasses")
     return false
     
 

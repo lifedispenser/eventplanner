@@ -8,10 +8,11 @@
 
 <script type="text/javascript">
   Eventplanner.contacts = <%= @contacts.to_json.html_safe %>;
+  Eventplanner.user = <%= @user ? @user.to_json(only: ['name', 'email', 'id']).html_safe : 'null' %>;
   $(function() {
     // Blog is the app name
     window.router = new Eventplanner.Routers.Events({
-      events: <%= @events.to_json(:include => :items).html_safe -%>,
+      events: <%= @events.to_json(include: { items: {}, owner: { only: ['name', 'email', 'id']}}).html_safe -%>,
       templates: <%= @templates.to_json(:include => :items).html_safe -%>
     });
 

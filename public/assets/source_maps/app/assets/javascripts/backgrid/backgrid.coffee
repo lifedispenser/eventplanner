@@ -66,4 +66,4 @@ class Backbone.UndoModel extends Backbone.Model
       model.save(null, {
         success: (e) ->
           $(".save-indicator").text("saved - " + moment().calendar())
-        })
+        }) if model.hasChanged()

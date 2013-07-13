@@ -2,8 +2,10 @@ Eventplanner::Application.routes.draw do
   get 'events/new_event' => 'events#create'
 
   get 'code/:code' => 'events#eventcode'
+  post "mail/send_reminders" => "mail#reminder_email"
   post 'save_template' => 'events#save_template'
   post 'load_template' => 'events#load_template'
+  get 'faq' => "home#faq"
   resources :events
   resources :items
 
@@ -15,7 +17,7 @@ Eventplanner::Application.routes.draw do
 
   match 'users/contacts_sync' => 'users#contacts_sync'  
   match 'users/contacts' => 'users#contacts'  
-  devise_for :users
+  devise_for :users, :controllers => {:confirmations => "confirmations"}
   resources :users  
 
   # The priority is based upon order of creation:

@@ -2,6 +2,9 @@ class Eventplanner.Models.Event extends Backbone.UndoModel
 	toJSON: ->
     return { event: _.clone( this.attributes ) }
 
+  urlRoot: ->
+    return '/events/'
+
   @gridColumns: [
     {}= 
       name:     'name'
@@ -28,7 +31,7 @@ class Eventplanner.Models.Event extends Backbone.UndoModel
       width: 5
     {}= 
       name:     'x'
-      label:    'X'
+      label:    ''
       cell:     'delete'
       editable: false
       formatter: Backgrid.DeleteFormatter

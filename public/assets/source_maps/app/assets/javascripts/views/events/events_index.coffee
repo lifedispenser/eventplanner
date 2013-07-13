@@ -9,8 +9,6 @@ class Eventplanner.Views.EventsIndex extends Backbone.View
       columns: @collection.model.gridColumns
     })
     grid = Eventplanner.Grids["Events"]
-    grid.render()
-    grid.insertAddRow("+ New Event")
-    
+    grid.render()    
     return grid.$el
 

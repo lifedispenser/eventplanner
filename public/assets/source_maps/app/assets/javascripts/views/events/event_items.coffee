@@ -15,7 +15,6 @@ class Eventplanner.Views.EventItems extends Backbone.View
     grid = Eventplanner.Grids['Items' + @collection.event.get('id')]
     grid.render()
     grid.$el.attr("id", 'Items' + @collection.event.get('id'))
-    grid.insertAddRow("+ Add New Item") if @collection.length is 0
     grid.body.$el.sortable({
       handle: ".dragger"
       forceHelperSize: true
@@ -35,5 +34,6 @@ class Eventplanner.Views.EventItems extends Backbone.View
         ui.item.trigger("updated_index", ui.item.index())
       })
     #fix bug where cell is still in input mode after a history back/forward
-    grid.body.saveAndRefresh() 
-    return grid.$el
+    grid.body._refresh()
+    grid.pic = new Eventplanner.Views.PersonInCharge(grid: grid)
+    return grid

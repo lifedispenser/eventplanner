@@ -47,24 +47,26 @@ class Backgrid.SettingsCell extends Backgrid.Cell
       )
 
   deleteRow: (e) ->
-    @model.destroy() if (window.confirm("Are you sure you want to delete this row?"))
-    @$el.trigger("saveAndRefresh")
-    @model.collection.trigger("refresh:classes")
+    if (window.confirm("Are you sure you want to delete this row?"))
+      collection = @model.collection
+      @model.destroy()
+      collection.trigger("saveAndRefresh")  
+
 
   insertRowBelow: (e) ->
     model = @addNewRow()
     index = @model.collection.indexOf(@model) + 1
+    @model.collection.add(model, {at: index })
     @model.collection.once("sync", () ->
-      @.model.collection.move(model, index)
-      @$el.trigger("saveAndRefresh")  
+      @model.collection.trigger("saveAndRefresh")  
     , this)
 
   insertRowAbove: (e) ->
     model = @addNewRow()
     index = @model.collection.indexOf(@model)
+    @model.collection.add(model, {at: index })
     @model.collection.once("sync", () ->
-      @model.collection.move(model, index)
-      @$el.trigger("saveAndRefresh")  
+      @model.collection.trigger("saveAndRefresh")  
     , this)
 
   addNewRow: () ->

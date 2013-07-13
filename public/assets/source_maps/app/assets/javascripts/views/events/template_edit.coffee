@@ -6,6 +6,7 @@ class Eventplanner.Views.TemplateEdit extends Backbone.View
 
   render: ->
     #remove otherwise this grid will catch all the event triggers for some reason
+    Eventplanner.Grids['Events'].remove() if Eventplanner.Grids['Events']
     Eventplanner.Grids['Templates'].remove() if Eventplanner.Grids['Templates']
     Eventplanner.Grids['Template' + @model.get('id')] ?= new Backgrid.Grid({
       headerCell: Backgrid.Cell

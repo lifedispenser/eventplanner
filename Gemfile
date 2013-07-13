@@ -32,8 +32,7 @@ gem 'resque_mailer'
 
 gem "spork-rails", :group => :test
 gem "rspec-rails", ">= 2.12.2", :group => [:development, :test]
-gem 'coffee-rails-source-maps', :group => :development
-gem "letter_opener", :group => :development
+gem "letter_opener", :group => :development, :git => 'git://github.com/ryanb/letter_opener.git'
 gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
 gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false

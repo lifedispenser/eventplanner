@@ -8,7 +8,6 @@ class Backgrid.hasClassRow extends Backgrid.Row
     @listenTo(@model, "hasclass:refresh", @setClasses)
 
   indent: () ->
-    console.log('hi')
     @model.set({
       child: 1
       }, {silent: true})
@@ -17,7 +16,6 @@ class Backgrid.hasClassRow extends Backgrid.Row
     @model.set({
       child: null
       }, {silent: true})
-    console.log('hi')
 
   #gets called on the last row 
   setClasses: ->

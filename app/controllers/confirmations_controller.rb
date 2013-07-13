@@ -1,9 +1,5 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery
-
-
+class ConfirmationsController < Devise::ConfirmationsController
   protected
-
     def after_confirmation_path_for(resource_name, resource)
       @default_templates = Event.where(template: 0)
       @default_templates.each do |template|
@@ -11,5 +7,4 @@ class ApplicationController < ActionController::Base
       end
       after_sign_in_path_for(resource)
     end
-
 end

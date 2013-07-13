@@ -11,4 +11,3 @@ class Eventplanner.Collections.Items extends Backbone.OrderableCollection
         @remove(model)
         @push(model)
       , this)
-

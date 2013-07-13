@@ -17,7 +17,6 @@ class Eventplanner.Views.EventItem extends Backbone.View
     return this
 
   toggleInput: (ev) -> 
-    console.log(ev)
     parent = $(ev.target).parent('td');
     value = $(ev.target).text();
     input = $("<input type='text' value=#{value} >")
