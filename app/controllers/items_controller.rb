@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
   def create
     code = params[:item][:event_id] 
     params[:item].delete :event_id
-    event = Event.find(Event.id_from_code(code)
+    event = Event.find(Event.id_from_code(code))
     @item = Item.new(params[:item])
     @item.event = event
     
