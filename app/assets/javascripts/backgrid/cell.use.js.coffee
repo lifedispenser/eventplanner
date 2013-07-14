@@ -8,7 +8,7 @@ class Backgrid.UseCell extends Backgrid.Cell
     @$el.empty()
     @$el.addClass("use-cell")
     @$el.attr("model_id", @model.get("id"))
-    @$el.html("Use Template");
+    @$el.html("<a>Use Template</a>");
     @delegateEvents();
     return this
 
