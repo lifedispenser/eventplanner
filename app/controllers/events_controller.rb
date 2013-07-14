@@ -17,19 +17,20 @@ class EventsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @events.to_json(:include => :items) }
+      format.json { render json: @events.as_json(:include => :items).to_json }
     end
   end
 
   # GET /events/1 t
   # GET /events/1.json
   def show
-    @event = Event.find(params[:id], :include => :items)
+    id = Event.id_from_code params[:id]
+    @event = Event.find(id, :include => :items)
     EventUser.find_or_create_by_user_id_and_event_id(current_user.id, @event.id)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @event.to_json(:include => {items: {},owner: {only: ['name','email','id']}}) }
+      format.json { render json: @event.as_json(:include => {items: {},owner: {only: ['name','email','id']}}).to_json }
     end
   end
 
@@ -61,7 +62,7 @@ class EventsController < ApplicationController
           session['events'] << @event.id
         end
         format.html { redirect_to ('/events#' + @event.id.to_s) }
-        format.json { render json: @event.to_json(:include => { owner: { only: ['name', 'id', 'email']}}), status: :created, location: @event }
+        format.json { render json: @event.as_json(:include => { owner: { only: ['name', 'id', 'email']}}).to_json, status: :created, location: @event }
       else
         format.html { render action: "new" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -98,13 +99,6 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }
-    end
-  end
-
-  def eventcode 
-    args = Base64.urlsafe_decode64(params[:code])
-    if args != ""
-      event = Event.find(args[0])
     end
   end
 

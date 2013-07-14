@@ -13,9 +13,19 @@ class Event < ActiveRecord::Base
 	accepts_nested_attributes_for :items, allow_destroy: true
 
 
-  def generate_event_code
+  def code_from_id
     string = self.id.to_s
-    return Base64.urlsafe_encode64(string)
+    return Base64.urlsafe_encode64(string.encrypt)
+  end
+
+  def self.id_from_code(code)
+    return Base64.urlsafe_decode64(code).decrypt.to_i
+  end
+
+  def as_json(options = { })
+    h = super(options)
+    h[:id] = code_from_id
+    h
   end
 
   amoeba do

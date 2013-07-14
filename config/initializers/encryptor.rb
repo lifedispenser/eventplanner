@@ -1,0 +1,1 @@
+Encryptor.default_options.merge!(:key => 'secret-ih890newauduq0dfn')

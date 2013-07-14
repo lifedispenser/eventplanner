@@ -20,15 +20,12 @@ Eventplanner::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.action_mailer.default_url_options = { :host => 'example.com' }
+  config.action_mailer.default_url_options = { :host => 'churchlifeeventplanner.org' }
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "example.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    user_name: "lifedispenser@gmail.com",
+    password: "8e1hCdvWZFMbVc_-NTGATg"
   }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised

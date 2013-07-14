@@ -12,8 +12,8 @@
   $(function() {
     // Blog is the app name
     window.router = new Eventplanner.Routers.Events({
-      events: <%= @events.to_json(include: { items: {}, owner: { only: ['name', 'email', 'id']}}).html_safe -%>,
-      templates: <%= @templates.to_json(:include => :items).html_safe -%>
+      events: <%= @events.as_json(include: { items: {}, owner: { only: ['name', 'email', 'id']}}).to_json.html_safe -%>,
+      templates: <%= @templates.as_json(:include => :items).to_json.html_safe -%>
     });
 
     Backbone.history.start();
