@@ -40,9 +40,9 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    event_id = params[:item][:event_id] 
+    code = params[:item][:event_id] 
     params[:item].delete :event_id
-    event = Event.find(event_id)
+    event = Event.find(Event.id_from_code(code)
     @item = Item.new(params[:item])
     @item.event = event
     
