@@ -21,4 +21,4 @@ class Backgrid.UseCell extends Backgrid.Cell
       success : (json) ->
         window.router.events.add(json)
         window.location = "http://"+window.location.host+"/events#"+json.id
-      }) 
+      })  
