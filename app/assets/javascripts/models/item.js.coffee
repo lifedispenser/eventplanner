@@ -42,14 +42,14 @@ class Eventplanner.Models.Item extends Backbone.UndoModel
     {}= 
       name:     'id'
       label:    'ID'
-      cell:     'integer'
+      cell:     'string'
       editable: false
       renderable: false
       sortable: false
     {}= 
       name:     'event_id'
       label:    ''
-      cell:     'integer'
+      cell:     'string'
       editable: false
       renderable: false
       sortable: false
