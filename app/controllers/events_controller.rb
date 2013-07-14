@@ -45,11 +45,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1/edit
-  def edit
-    @event = Event.find(params[:id], :include => :items)
-  end
-
   # POST /events
   # POST /events.json
   def create
@@ -73,7 +68,7 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.json
   def update
-    @event = Event.find(params[:id])
+    @event = Event.find(Event.id_from_code(params[:id]))
     respond_to do |format|
       if @event.update_attributes(params[:event].slice(*Event.accessible_attributes.to_a))
         format.html { redirect_to @event, notice: 'event was successfully updated.' }
@@ -88,7 +83,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event = Event.find(params[:id])
+    @event = Event.find(Event.id_from_code(params[:id]))
     if current_user.id == @event.template
       @event.destroy
     elsif current_user.id == @event.owner.id
@@ -103,7 +98,7 @@ class EventsController < ApplicationController
   end
 
   def save_template
-    @event = Event.find(params[:id])
+    @event = Event.find(Event.id_from_code(params[:id]))
     @template = @event.dup_as_template(current_user, params[:template_title], params[:template_desc])
 
     respond_to do |format|
@@ -112,7 +107,7 @@ class EventsController < ApplicationController
   end
 
   def load_template
-    @template = Event.find(params[:id]) 
+    @template = Event.find(Event.id_from_code(params[:id]))
     @event = @template.dup_as_event (current_user)
     respond_to do |format|
       format.json { render :json => @event, :include => {items: {}, owner: {only: ['name', 'email', 'id']} }}

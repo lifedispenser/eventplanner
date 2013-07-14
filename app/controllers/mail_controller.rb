@@ -1,7 +1,7 @@
 class MailController < ApplicationController
   
   def reminder_email
-    @event = Event.find(params[:id])
+    @event = Event.find(Event.id_from_code(params[:id]))
     @receivers = params[:receivers].split(",")
 
     @receivers.each do |receiver|
