@@ -247,4 +247,5 @@ DEPENDENCIES
   rspec-rails (>= 2.12.2)
   sass-rails (~> 3.2.3)
   spork-rails
+  therubyracer
   uglifier (>= 1.0.3)
