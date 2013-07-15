@@ -55,7 +55,8 @@ class Eventplanner.Views.PersonInCharge extends Backbone.View
       menu[0].style.width = $(e.target).parent().width() + "px"
 
   syncContacts: () ->
-    window.location = "http://"+window.location.host+"/users/contacts_sync?location=" + window.location.href
+    url = window.location.href.split("#")
+    window.location = "http://"+window.location.host+"/users/contacts_sync?location=" + url[0] + "&hash=" + url[1]
 
   openReminders: () ->
     daydiff = (first, second) ->

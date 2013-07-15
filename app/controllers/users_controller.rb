@@ -12,7 +12,14 @@ class UsersController < ApplicationController
   def contacts
     if params[:token]
       begin     
-        current_user.contacts_sync params[:token]   
+        current_user.contacts_sync params[:token]
+        flash[:notice] = 'Contacts successfully synced. Autocomplete should be working now.'
+        if session[:return_to]
+          redirect_to session[:return_to]
+          session[:return_to] = nil
+        else 
+          redirect_to "/events"
+        end
       rescue Exception => e
       end
     end
@@ -20,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def contacts_sync
-    session[:return_to] ||= params[:location]
-    redirect_to GmailContacts::Google.authentication_url(session[:return_to])
+    session[:return_to] = params[:location] + "#" + params[:hash] if params[:location]
+    redirect_to GmailContacts::Google.authentication_url(users_contacts_url)
   end
 end
