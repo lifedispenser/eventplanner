@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   def show
     id = Event.id_from_code params[:id]
     @event = Event.find(id, :include => :items)
-    EventUser.find_or_create_by_user_id_and_event_id(current_user.id, @event.id)
+    EventUser.find_or_create_by_user_id_and_event_id(current_user.id, @event.id) if current_user
 
     respond_to do |format|
       format.html # show.html.erb
