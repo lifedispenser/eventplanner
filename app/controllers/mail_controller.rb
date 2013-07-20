@@ -8,7 +8,7 @@ class MailController < ApplicationController
       data = {
         :receiver => receiver,
         :event => @event,
-        :url => request.host + "/events#" + @event.generate_event_code
+        :url => request.host + "/events#" + @event.code_from_id
       }
       ReminderMailer.reminder_email(data).deliver
       respond_to do |format|

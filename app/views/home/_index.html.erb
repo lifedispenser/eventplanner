@@ -13,23 +13,60 @@
 </div>
 <br><br>
 <div class="row">
-  <div class="span4">
-    <h3>Manage and Track.</h3>
-    <p>
-      Your master list to take care of planning events in a good way. Helps you to avoid doing things last minute and forgetting crucial event details.
-    </p>
-    <%= image_tag "ep_list.png" %>    
-  </div>
-  <div class="span4">
-    <h3>Coordinate and Perfect.</h3>
-    <p>Assign items to saints and follow up with them. Helps all the saints to participate in event planning and to plan their own events.</p>
-    <%= image_tag "ep_people.png" %>
-  </div>
-  <div class="span4">
-    <h3>Enjoy!</h3>
-    <p>A snappy interface, reusable templates, and minimal approach makes event planning a joy. Events help the saints fellowship, pray, and become vital together.  </p>
-    <%= image_tag "ep_speed.png" %>
+  <div class="span12">
+    <h2>Instructions:</h2>
+    <h3>Step 1: Create an event <span class="small">from a template or from scratch.</span></h3>
+    <div id="create-event"></div>
+    <h3>
+      Step 2: Assign items to people
+    </h3>
+    <div id="assign-items"></div>
+    <h3>
+      Step 3: Fill in the Results      
+    </h3>
+    <div id="fill-in-results"></div>
+    <h3>
+      Step 4: Check items off.
+    </h3>
+    <div id="check-items"></div>
+    <h3>Get started!</h3>
   </div>
 </div>
 
 <br><br><br>
+<script type="text/javascript">
+  Eventplanner.contacts = {
+    "Adam Smith" : "adam.smith@example.com",
+    "Dan Jones" : "bob.jones@example.com",
+    "Martha Casey" : "martha.casey@example.com",
+    "Travis Brighton" : "travis.brighton@example.com",
+    "Frank Lin" : "frank.lin@example.com",
+    "Josephine Han" : "josephine.han@example.com",
+    "Rebecca Gardner" : "rebecca.gardner@example.com",
+    "Nancy Karr" : "nancy.karr@example.com",
+    "Steven Pearson" : "steven.pearson@example.com",
+    "Veronica Watson" : "veronica.watson@example.com",
+    "Yu-liu Zhao" : "yuliu.zhao@example.com"
+  };
+  Eventplanner.user = {
+    "name" : "A test user",
+    "email" : "test@churchlifeeventplanner.org",
+    "id" : 0
+  }
+  $(function() {
+    // Blog is the app name
+    window.router = new Eventplanner.Routers.Home({
+      
+      introTemplates: [
+      ],
+
+      assignItemEvents: [
+      {"created_at":"2013-07-13T17:26:26Z","date":null,"id":"assign-items","location":"","name":"","order":"1629,1630,1763,1764,1767,1768","template":null,"template_desc":"","template_title":"","updated_at":"2013-07-19T23:10:45Z","items":[{"child":1,"completed_by":null,"created_at":"2013-07-13T17:29:24Z","days_before":null,"description":"Prepare Song Sheet","event_id":91,"id":1630,"parent_id":null,"person_in_charge":null,"result":"","section_id":null,"status":null,"updated_at":"2013-07-19T22:11:25Z"},{"child":null,"completed_by":null,"created_at":"2013-07-13T17:29:20Z","days_before":null,"description":"Music","event_id":91,"id":1629,"parent_id":null,"person_in_charge":"","result":"","section_id":null,"status":null,"updated_at":"2013-07-19T22:10:50Z"},{"child":1,"completed_by":null,"created_at":"2013-07-19T22:10:52Z","days_before":null,"description":"Secure Musicians","event_id":91,"id":1763,"parent_id":null,"person_in_charge":null,"result":null,"section_id":null,"status":null,"updated_at":"2013-07-19T23:10:33Z"},{"child":null,"completed_by":null,"created_at":"2013-07-19T22:10:55Z","days_before":null,"description":"Food Arrangements","event_id":91,"id":1764,"parent_id":null,"person_in_charge":null,"result":null,"section_id":null,"status":null,"updated_at":"2013-07-19T23:10:42Z"},{"child":1,"completed_by":null,"created_at":"2013-07-19T23:10:44Z","days_before":null,"description":"Menu","event_id":91,"id":1767,"parent_id":null,"person_in_charge":null,"result":null,"section_id":null,"status":null,"updated_at":"2013-07-19T23:10:50Z"},{"child":1,"completed_by":null,"created_at":"2013-07-19T23:10:45Z","days_before":null,"description":"Cooking Arrangements","event_id":91,"id":1768,"parent_id":null,"person_in_charge":null,"result":null,"section_id":null,"status":null,"updated_at":"2013-07-19T23:10:58Z"}],"owner":{"email":"lifedispenser@gmail.com","id":2,"name":"Spencer"}}
+      ],
+
+      
+    });
+
+    Backbone.history.start();
+  });
+</script>
