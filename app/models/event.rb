@@ -43,19 +43,21 @@ class Event < ActiveRecord::Base
     new_template.location = ""
     new_template.date = nil
     new_template.save
+    if original.items.length > 0
+      ids = original.items.map { |item| item.id }
+      new_order = []
+      original.order.split(',').each do |id|
+        new_item = original.items.at(ids.index(id.to_i)).dup
+        new_item.event_id = new_template.id
+        new_item.result = ""
+        new_item.status = ""
+        new_item.person_in_charge = ""
+        new_item.save
+        new_order.push(new_item.id)
+      end
+      new_template.order = new_order.join(",")
+    end 
 
-    ids = original.items.map { |item| item.id }
-    new_order = []
-    original.order.split(',').each do |id|
-      new_item = original.items.at(ids.index(id.to_i)).dup
-      new_item.event_id = new_template.id
-      new_item.result = ""
-      new_item.status = ""
-      new_item.person_in_charge = ""
-      new_item.save
-      new_order.push(new_item.id)
-    end
-    new_template.order = new_order.join(",")
     new_template.save
     return new_template
 
@@ -70,15 +72,17 @@ class Event < ActiveRecord::Base
     new_event.owner = current_user if current_user
     new_event.save
 
-    ids = original.items.map { |item| item.id }
-    new_order = []
-    original.order.split(',').each do |id|
-      new_item = original.items.at(ids.index(id.to_i)).dup
-      new_item.event_id = new_event.id
-      new_item.save
-      new_order.push(new_item.id)
+    if original.items.length > 0
+      ids = original.items.map { |item| item.id }
+      new_order = []
+      original.order.split(',').each do |id|
+        new_item = original.items.at(ids.index(id.to_i)).dup
+        new_item.event_id = new_event.id
+        new_item.save
+        new_order.push(new_item.id)
+      end
+      new_event.order = new_order.join(",")
     end
-    new_event.order = new_order.join(",")
     new_event.save
     return new_event
   end

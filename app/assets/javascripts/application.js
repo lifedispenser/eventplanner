@@ -14,6 +14,9 @@
 //= require bootstrap
 //= require jquery_ujs
 //= require jqueryui.custom
+//= require chardin
+//= require jquery.scrolldeck-reqs
+//= require jquery.scrolldeck
 //= require moment
 //= require underscore
 //= require backbone

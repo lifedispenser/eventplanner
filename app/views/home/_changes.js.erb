@@ -1,0 +1,18 @@
+Eventplanner.Grids['Itemsassign-items'].collection.at(2).set("person_in_charge", '{"name":"Adam Smith","email":"adam.smith@example.com"}')
+
+Eventplanner.Grids['Itemsfill-in-events'].collection.at(2).set("result", '200 copies printed, pick up at the office')
+
+Eventplanner.Grids['Itemscheck-events'].collection.at(4).set("status", 'completed')
+Eventplanner.Grids['Itemscheck-events'].collection.at(5).set("status", 'pending')
+
+Eventplanner.Grids['Itemscheck-events'].body._refresh()
+
+
+  $("#create-event table tr:nth-child(2) td:nth-child(3)").attr("data-intro", "Click on this button to use the template").attr("data-position", "top");
+  $("#create-event table tr:nth-child(4) td:nth-child(4)").attr("data-intro", "Click here to view the template details").attr("data-position", "bottom");
+
+  $("#assign-items table tr:nth-child(2) td:nth-child(3)").attr("data-intro", "Type an email address here.").attr("data-position", "top");
+
+  $("#fill-in-results table tr:nth-child(2) td:nth-child(2)").attr("data-intro", "Fill in the results here.").attr("data-position", "top");
+
+  $("#check-items table tr:nth-child(2) td:nth-child(5)").attr("data-intro", "Change the status to 'Pending' or 'Completed'.").attr("data-position", "top");
