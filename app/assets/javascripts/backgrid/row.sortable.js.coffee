@@ -7,7 +7,12 @@ class Backgrid.sortableRow extends Backgrid.hasClassRow
     if index == 0 
       @model.set({
         child: null
+        index: index
         })
-      @model.save()
+    else
+      @model.set({
+        index: index
+        })
+    @model.save()
     
-    @model.collection.trigger("saveAndRefresh")
+    @model.collection.trigger("refresh:classes")

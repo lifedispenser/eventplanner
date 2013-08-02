@@ -1,4 +1,3 @@
- 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -504,4 +503,46 @@ a {
   margin:0 auto;
   margin-bottom:120px;
   width:200px;
+}
+
+
+.login .members {
+  ul {
+    border: 1px solid #EEE;
+    list-style: none;
+    padding:0;
+    position:relative;
+    width:322px;
+    .count {
+      position: absolute;
+      padding-left: 80px;
+      padding-right: 10px;
+      float: right;
+      right: -100px;
+      display: inline;    }
+    li{
+      position:absolute;
+      width:322px;
+      display:none;
+      padding:0;
+      margin:0;
+    }
+    li.me {
+      position: relative;
+      display:block;
+    }
+  }
+
+  ul:hover {
+    background-color: white;
+    .count {
+      background-color: white;
+      box-shadow: 3px 3px 3px rgba(0,0,0,.2);
+    }
+    li {
+      display:block;
+      background-color: white;
+      box-shadow: 3px 3px 3px rgba(0,0,0,.2);
+    }
+  }
 }

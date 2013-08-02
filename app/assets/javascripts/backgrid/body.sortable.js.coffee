@@ -10,16 +10,13 @@ class Backgrid.sortableBody extends Backgrid.Body
 
   
   saveAndRefresh: () ->
-    @collection.event.set({
-      order: _.compact(@collection.pluck("id")).toString()
-    })
     @_refresh()
 
   # so no order is called when you just need to refresh the grid
   _refresh: () ->
     @refresh()
     @setClasses()
-    @insertAddRow("+ Add New Item") if @collection.length is 0
+    @insertAddRow("+ Add Row")
 
 
   setClasses: () ->

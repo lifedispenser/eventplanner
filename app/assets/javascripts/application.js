@@ -22,6 +22,8 @@
 //= require backbone
 //= require backgrid
 //= require eventplanner
+//= require pusher
+//= require pusher.changes
 //= require_tree ./backgrid
 //= require_tree ../templates
 //= require_tree ./models

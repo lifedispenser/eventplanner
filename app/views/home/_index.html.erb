@@ -87,6 +87,12 @@ $(function() {
         duration: 600
       });
   })
-});
+});  
+   
+Backbone.UndoModel.prototype.initialize = function() {
+  return Backbone.Model.prototype.initialize.apply(this, arguments);
+};
+
+Backgrid.UseCell.prototype.addEventFromTemplate = function(e) {};
 
 </script>

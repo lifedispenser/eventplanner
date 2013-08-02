@@ -54,25 +54,22 @@ class Backgrid.SettingsCell extends Backgrid.Cell
 
 
   insertRowBelow: (e) ->
-    model = @addNewRow()
     index = @model.collection.indexOf(@model) + 1
-    @model.collection.add(model, {at: index })
-    @model.collection.once("sync", () ->
-      @model.collection.trigger("saveAndRefresh")  
-    , this)
+    model = @addNewRow(index)
 
   insertRowAbove: (e) ->
-    model = @addNewRow()
     index = @model.collection.indexOf(@model)
-    @model.collection.add(model, {at: index })
-    @model.collection.once("sync", () ->
-      @model.collection.trigger("saveAndRefresh")  
-    , this)
+    model = @addNewRow(index)
 
-  addNewRow: () ->
+  addNewRow: (index) ->
     model = @model.collection.create({
       event_id: @model.collection.event.get('id')
-    }, {wait: true})
+      index: index
+    }, {
+      at: index
+      success: (model, response, options) ->
+        model.collection.trigger("refresh:classes")
+    })
     return model
 
   indentRow: (e) ->

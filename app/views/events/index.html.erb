@@ -14,7 +14,14 @@
       events: <%= @events.as_json(include: { items: {}, owner: { only: ['name', 'email', 'id']}}).to_json.html_safe -%>,
       templates: <%= @templates.as_json(:include => :items).to_json.html_safe -%>
     });
-
+    window.pusher = new Pusher('de04ec03064e50d210e6', {
+      auth: {
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        }
+      }
+    });
     Backbone.history.start();
   });
 </script>
+<!-- <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script> -->

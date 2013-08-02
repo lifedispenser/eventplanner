@@ -42,18 +42,18 @@ class ItemsController < ApplicationController
   def create
     code = params[:item][:event_id] 
     params[:item].delete :event_id
-    event = Event.find(Event.id_from_code(code))
+    index = params[:item][:index]
+    params[:item].delete :index
+
     @item = Item.new(params[:item])
+    @item.ranked_position = index if index
+    event = Event.find(Event.id_from_code(code))
     @item.event = event
-    
-    respond_to do |format|
-      if @item.save
+    @item.save
+
+    respond_to do |format|  
         format.html { redirect_to @item, notice: 'item was successfully created.' }
         format.json { render json: @item, status: :created, location: @item }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
     end
   end
 
@@ -61,6 +61,12 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
+    if params[:item][:index]
+      index = params[:item][:index]
+      params[:item].delete :index
+      @item.update_attribute :ranked_position, index
+    end    
+
     respond_to do |format|
       if @item.update_attributes(params[:item].slice(*Item.accessible_attributes.to_a))
         format.html { redirect_to @item, notice: 'item was successfully updated.' }

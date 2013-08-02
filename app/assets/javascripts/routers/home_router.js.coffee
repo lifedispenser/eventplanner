@@ -23,7 +23,6 @@ class Eventplanner.Routers.Home extends Backbone.Router
     col_1 = new Eventplanner.Collections.Items()
     col_1.reset @assign.at(0).get('items')
     col_1.event = @assign.at(0)
-    col_1.order()
     two = new Eventplanner.Views.EventItems(collection: col_1)
     grid_two = two.render()
     two_el = grid_two.$el
@@ -33,7 +32,6 @@ class Eventplanner.Routers.Home extends Backbone.Router
     col_2 = new Eventplanner.Collections.Items()
     col_2.reset @fillin.at(0).get('items')
     col_2.event = @fillin.at(0)
-    col_2.order()
     three = new Eventplanner.Views.EventItems(collection: col_2)
     grid_three = three.render()
     three_el = grid_three.$el
@@ -43,7 +41,6 @@ class Eventplanner.Routers.Home extends Backbone.Router
     col_3 = new Eventplanner.Collections.Items()
     col_3.reset @check.at(0).get('items')
     col_3.event = @check.at(0)
-    col_3.order()
     four = new Eventplanner.Views.EventItems(collection: col_3)
     grid_four = four.render()
     four_el = grid_four.$el
@@ -63,9 +60,3 @@ class Eventplanner.Routers.Home extends Backbone.Router
     })
     return el
 
-Backbone.UndoModel::initialize = () ->
-  Backbone.Model.prototype.initialize.apply(this, arguments)
-
-Backgrid.UseCell::addEventFromTemplate = (e) ->
-  
-    

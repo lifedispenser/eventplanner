@@ -35,10 +35,15 @@ class Backgrid.AddRow extends Backgrid.EmptyRow
     if !_.isUndefined(@body.collection.event)
       model = @body.collection.create({
         event_id: @body.collection.event.get('id')
-      }, {wait: true})
+        index: 'last'
+      }, {wait: true,
+      success: (model, response, options) ->
+        model.collection.trigger("refresh:classes")
+      })
     else
       model = @body.collection.create({},{wait: true})
     @body.collection.once("sync", () ->
       @body.collection.trigger("saveAndRefresh")  
     , this)
     return model
+

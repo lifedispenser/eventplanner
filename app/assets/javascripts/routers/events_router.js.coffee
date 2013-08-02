@@ -14,6 +14,7 @@ class Eventplanner.Routers.Events extends Backbone.Router
 
 
   index: ->
+    window.pusher.unsubscribeAll()
     # header (static banner)
     head = new Eventplanner.Views.EventsIndexHead()
     $("#section-head").html(head.render())
@@ -64,7 +65,6 @@ class Eventplanner.Routers.Events extends Backbone.Router
           $("#loading").dialog("close")
           e.item_collection.reset e.get("items")
           e.item_collection.event = e
-          e.item_collection.order()
           e.item_collection.trigger("refresh:classes")
           window.router.events.add(e)
           e.trigger("reset")
@@ -107,13 +107,17 @@ class Eventplanner.Routers.Events extends Backbone.Router
     #render body grid
     collection.reset event.get("items")
     collection.event = event
-    collection.order()
     body = new Eventplanner.Views.EventItems(collection: collection)
     grid = body.render()
     el = grid.$el
     $("#section-body").html(el)
     @addResizeableToGrid(el, collection.model.gridColumns)
     grid.pic.render()
+    channel_view = new Eventplanner.Views.Channel(
+      pusher: window.pusher
+      name: "presence-events-" + id
+    )
+    
     
   newEvent: ->
     return
