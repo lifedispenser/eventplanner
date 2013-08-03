@@ -21,6 +21,7 @@
 //= require underscore
 //= require backbone
 //= require backgrid
+//= require backgrid.changes
 //= require eventplanner
 //= require pusher
 //= require pusher.changes
