@@ -1,5 +1,5 @@
-class Eventplanner.Views.EventTools extends Backbone.View
-  template: JST['events/event_tools']
+class Eventplanner.Views.Events.Edit.Tools extends Backbone.View
+  template: JST['events/edit/tools']
 
   events: 
     "click .export" : 'exportTemplate'

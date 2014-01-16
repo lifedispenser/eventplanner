@@ -1,6 +1,11 @@
 window.Eventplanner =
   Models: {}
   Collections: {}
-  Views: {}
+  Views: {
+    Events: {
+      Index: {}
+      Edit: {}
+    }
+  }
   Routers: {}
   Grids: {}

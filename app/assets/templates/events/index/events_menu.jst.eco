@@ -1,0 +1,11 @@
+<div class="events-menu pure-menu pure-menu-open pure-menu-horizontal">
+  <a class="title abril" href="">Events</a>
+  <ul >
+    <li><a href="" class="pure-menu-selected">Current</a></li>
+    <li><a href="">Labeled</a></li>
+    <li><a href="">All</a></li>
+    <li><a href="">Past</a></li>
+    <li ></li>
+  </ul>
+
+</div>

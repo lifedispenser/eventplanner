@@ -1,0 +1,125 @@
+/*
+ *  All css related to events. Separate from Home.
+ *
+ *= require_self
+ *= require pure
+ *= require backgrid.css
+ *= require backgrid-moment-cell
+ *= require jquery-ui-1.10.3.custom
+ *= require login
+ */
+$pumpkin: #E35F27;
+$yellow: #EBC623;
+$lblue: #40BDAC;
+$dblue: #148C7C;
+$red: #DB3737;
+
+body { font: 400 14px/16px 'Verdana';}
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,800,700|Abril+Fatface);
+
+.center {text-align:center;}
+.floatright {float:right;}
+.abril {font: 400 50px/54px "Abril Fatface"; color: $pumpkin;}
+.open-sans { font: 200 40px/44px "open sans"; color: $lblue; }
+.size-title { font-size: 62px; margin:10px 0; }
+.divider { font:25px 'Arial'; color: #777; color: $yellow;
+  i {font-size: 21px; color: #333; text-shadow: 2px 2px #bbb; color:$pumpkin;}
+}
+
+#section-body { padding:0 20px;
+  .events-menu, .templates-menu {
+    ul {top:-4px;
+      li {font: 20px 'open sans';text-transform: uppercase;
+        a {padding:0 30px;}
+      }
+    }
+    .title {font-size:40px;text-transform: none;display:inline-block;color:$dblue;}
+    form.pure-form{display:inline;position:relative;top:-6px;
+      input{font-size:1em;}
+    }
+  }
+  .pure-menu-selected {color:$red;}
+}
+
+/*------------------ Backgrid Table CSS ------------------*/
+table.backgrid {
+/* Handle specific cases */
+  input {font:14px "Verdana";position:relative;padding-left:6px;}
+  th:hover {text-overflow:visible;overflow:visible;  
+background-color: inherit;}
+  td.string-cell {position:relative;}
+  span.email {font-style: italic;font-size:80%;}
+  .placeholder {font-style: italic;opacity: .5;}
+  
+/* Delete Cell */
+  .EPdelete {  font-weight:bold;cursor:pointer;font-size: 21px;text-indent: 6px!important;}
+  .EPdelete:hover {font-weight:bold;border:1px solid #999;}
+
+
+/* Color pending, overdue, completed and parent rows */
+  tr.pending { background-color:#E26B0A;color:white;
+    td { background-color:#E26B0A;border-color:#E26B0A;color:white;
+      input {color:white;}
+    }
+  }
+  tr.overdue {background-color:#C0504D;color:white;
+    td {background-color:#C0504D;border-color:#C0504D;color:white;
+      input {color:white;}
+    }
+  }
+  tr.completed {background-color:#76933C;color:white;
+    td {background-color:#76933C;border-color: #76933C;color:white;
+      input {color:white;}
+    }
+  }
+  tr.overdue, tr.pending, tr.completed {
+    .dragger {left:0px;}
+    .dragger:before {border:1px dotted white;}
+    td.settings {background-image: url('101w.png')!important;}
+    td.settings:hover {border:1px solid #666;background-color: rgba(255,255,255,.06)!important;}
+  } 
+  tr.parent { background-color: #EEE;font-weight: bold; 
+    td {background-color: #EEE;border-color: #DDDDDD;color:black;}
+    td.settings { background-image: url('101.png')!important; 
+      .menu-settings {font-weight: normal!important;}
+    }
+  }
+
+/* Settings Cell */
+  td.settings {position:relative;text-align:center;text-indent: 0;overflow:visible;background: url('101.png') center no-repeat;
+    .menu-settings {position:absolute;right:-6px;width:130px;color:black;display:none;border:1px solid rgb(160,160,160);background-color: white;z-index: 10001;}
+  }
+  td.settings:hover {border:1px solid #999;background-color: rgba(0,0,0,.06)!important;cursor:pointer;}
+
+/* Dragger on the left side of row */
+  .drag_wrapper, .wrapper {position:relative;height:inherit;width:inherit;top:0;text-indent:5px;}
+  tr:hover .dragger {display:block;}
+  .dragger {display:none;position:absolute;height:inherit;top:0;left:1px;margin: 1px 10px 0px 0px;width:12px;cursor:move;height:100%;}
+  .dragger:before {content:"";position:absolute;height:inherit;left:0px;width:1px;border:1px dotted rgba(0,0,0,.3);border-width: 0px 1px;}
+  tr.child .drag_wrapper {text-indent:30px!important;}
+
+/* Person In Charge Section */
+  #section-email {float: right;display: inline-table;position: relative;right: 5px;background: url('101.png') center no-repeat;width: 30px;height:20px;
+    ul {z-index: 10001;position: absolute;top:25px;right:-5px;color:black;display:none;border:1px solid rgb(160,160,160);background-color: white;list-style-type: none;
+      li a {font-weight: normal;}
+    }
+  }
+  .open {display:block!important;}
+}
+
+/* Events Edit Section */
+
+#section-head { margin: 20px 180px;
+  table.backgrid {
+    th {font-size:.7em;font-style: italic;padding:0;margin:0;text-align: center;background-color: transparent;}
+    td:nth-child(2), td:nth-child(2) input {font:400 34px/40px 'Abril Fatface'; color:$lblue; text-align: center;text-indent: 0;}
+    td,th{border:1px solid #eee;}
+  }
+}
+#section-tools {padding-bottom:20px;
+  .pure-u-1-2 { width:49.78%;} /*I have no idea why this hack is needed.*/
+  .center {text-align:center;}
+  .absolute {position: absolute; font-size:18px;margin-top:10px;}
+  .links, .people {margin:0 20px;padding:10px;border:1px solid #eee;}
+}

@@ -30,12 +30,12 @@
 .backgrid th,
 .backgrid td {
   height: 20px;
-  padding: 4px 5px;
+  padding: 5px 5px;
   overflow: hidden;
   line-height: 20px;
   text-align: left;
   text-overflow: ellipsis;
-  text-indent: 5px;
+  text-indent: 11px;
   white-space: nowrap;
   vertical-align: middle;
   border: 1px solid #DDD;
@@ -53,6 +53,7 @@
 .backgrid thead th {
   vertical-align: bottom;
   background-color: #f9f9f9;
+  color: #555;
 }
 
 .backgrid.backgrid-striped tbody tr:nth-child(odd) td,

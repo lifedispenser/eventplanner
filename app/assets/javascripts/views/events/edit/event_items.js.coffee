@@ -1,4 +1,4 @@
-class Eventplanner.Views.EventItems extends Backbone.View
+class Eventplanner.Views.Events.Edit.ItemsGrid extends Backbone.View
 
   initialize: () ->
     @collection = @options.collection

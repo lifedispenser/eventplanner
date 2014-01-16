@@ -1,0 +1,142 @@
+<div class="login menu-settings">
+  <div class="pure-menu pure-menu-open pure-menu-horizontal">
+    <% if current_user %>
+    <ul>
+      <li name='logout'><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
+      <li name='contacts-sync'><a>Contacts Sync</a></li>
+      <li name='profile' class="pure-menu-selected"><a><%= current_user.name %></a></li>
+    </ul>
+    <% else %>
+    <ul>
+      <li name='forgot'><a>Forgot?</a></li>
+      <li name='sign-up'><a>Sign up</a></li>
+      <li name='sign-in' class="pure-menu-selected"><a>Sign in</a></li>
+    </ul>
+    <% end %>
+    <i class="icon-chevron-sign-down right"></i>
+  </div>
+  <br>
+  <% if current_user %>
+    <div class="pure-u-1 profile current">
+      <h4 class='center'>Profile Settings:</h4>
+      <%= render '/layouts/divider' %>
+      <%= form_for(current_user, :url => user_path(current_user), html: { class: 'pure-form pure-form-aligned' }) do |f| %>
+        <fieldset>
+          <div class="pure-control-group">
+            <label for='name'>Name</label>
+            <%= f.text_field :name, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-control-group">
+            <label for='password'>Password</label>
+            <%= f.password_field :password, :class => "pure-u-1-2", :placeholder => "leave blank if not changing it", :autocomplete => "off" %>
+          </div>
+          <div class="pure-control-group">
+            <label for='confirmation'>Confirmation</label>
+            <%= f.password_field :password_confirmation, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-control-group">
+            <label for='current'>Current Password</label>
+            <%= f.password_field :current_password, :class => "pure-u-1-2", :placeholder => 'confirm password change' %>
+          </div>
+          <div class="pure-controls">
+            <%= f.submit 'Update', :class => "pure-button pure-button-primary" %>
+            <span class="unhappy">
+            Unhappy? <%= link_to "Cancel my account", registration_path('user'), :data => { :confirm => "Are you sure?" }, :method => :delete %>.
+            </span>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+    <div class="pure-u-1 contacts-sync">
+      <h4 class='center'>Contacts Sync:</h4>
+      <%= render '/layouts/divider' %>
+      <p>Import your Google contacts into Event Planner to easily assign people to items. <b>Note: This does not connect your account to Google; it merely stores the names and emails of your contacts locally.</b></p>
+      <p>If you have recently added contacts and they are not showing up, resync and they should be available. </p>
+      <p class='center'><%= link_to "Sync Contacts with Gmail", "/users/contacts_sync", :class => 'pure-button pure-button-primary' %></p>
+    </div>
+  <% else %>
+    <div class="pure-u-1 sign-in current">
+      <h4 class='center'>Sign In:</h4>
+      <%= render '/layouts/divider' %>
+      <%= form_for("user", :url => user_session_path, html: { class: 'pure-form pure-form-aligned' }) do |f| %>
+        <fieldset>
+          <div class="pure-control-group">
+            <label for='email'>Email</label>
+            <%= f.text_field :email, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-control-group">
+            <label for='password'>Password</label>
+            <%= f.password_field :password, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-controls">
+            <label for="remember_me" class="pure-checkbox">
+              <%= f.check_box :remember_me %> Remember me
+            </label>
+            <%= f.submit 'Sign in', :class => "pure-button pure-button-primary" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+    <div class="pure-u-1 sign-up">
+      <h4 class='center'>Sign Up:</h4>
+      <%= render '/layouts/divider' %>
+      <%= form_for("user", :url => user_registration_path, html: { class: 'pure-form pure-form-aligned' }) do |f| %>
+        <fieldset>
+          <div class="messages"></div>
+          <div class="pure-control-group">
+            <label for='email'>Email</label>
+            <%= f.text_field :email, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-control-group">
+            <label for='password'>Password</label>
+            <%= f.password_field :password, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-control-group">
+            <label for='confirmation'>Confirmation</label>
+            <%= f.password_field :password_confirmation, :class => "pure-u-1-2" %>
+          </div>
+          <div class="pure-controls">
+            <%= f.submit 'Sign up', :class => "pure-button pure-button-primary" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+    <div class="pure-u-1 forgot">
+      <h4 class='center'>Forgot your password?</h4>
+      <%= render '/layouts/divider' %>
+      <%= form_for("user", :url => password_path("user"), html: { class: 'pure-form pure-form-aligned', method: :post }) do |f| %>
+        <fieldset>
+          <div class="messages"></div>
+          <div class="pure-control-group center">
+            <label for='email'>Email</label>
+            <%= f.text_field :email, :class => "pure-u-1-2" %>
+          </div>
+          <div class="center">
+            <%= f.submit 'Send me reset password instructions', :class => "pure-button pure-button-primary" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<script>
+$().ready(function() {
+  $(document).on("click", Eventplanner.closeMenu)
+  $(".login").click(function() {
+    if(!$(this).hasClass("open")) {
+      $(this).addClass("open");
+    }
+  });
+  $(".login ul li a").click(function() {
+    $(this).parents('ul').find(".pure-menu-selected").removeClass("pure-menu-selected");
+    $(this).parents("li").addClass("pure-menu-selected")
+    $(this).parents(".login").find("div.current").removeClass("current");
+    $(this).parents(".login").find("div." + $(this).parents('li').attr("name")).addClass("current");
+  })
+});
+Eventplanner.closeMenu = function(e) {
+  if (!($(e.target).hasClass("menu-settings") || $(e.target).parents(".menu-settings").length > 0 || $(e.target).children(".menu-settings").length > 0)) {
+    $(".open").removeClass("open");
+  }
+}
+</script>

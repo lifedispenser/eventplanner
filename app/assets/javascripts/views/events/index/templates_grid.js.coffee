@@ -1,4 +1,4 @@
-class Eventplanner.Views.TemplatesIndex extends Backbone.View
+class Eventplanner.Views.Events.Index.TemplatesGrid extends Backbone.View
 
   initialize: () ->
     @collection = @options.collection

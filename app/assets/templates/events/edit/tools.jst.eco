@@ -1,9 +1,21 @@
-<td class="save-indicator">
-  saved
-</td>
-<td class="actions">
-  <a class="export">Export as Template</a>
+<div class="pure-u-1 center absolute"><i class="icon-refresh"></i></div>
 
+<div class="pure-u-1">
+  <div class="pure-u-1-2">
+    <div class="links">
+      <a class="share">Share Link</a>
+      <a class="export">Export as Template</a>
+    </div>
+  </div>
+
+  <div class="pure-u-1-2">
+    <div class="people">
+      <span class="save-indicator">Saved...</span>
+      <span class="viewers">4 People</span>
+    </div>
+  </div>
+</div>
+<div class="actions">
   <div id="export-form" title="Export as a Template">
     <form>
       <input type="hidden" name='id' >
@@ -33,4 +45,4 @@
       </table>
     </form>
   </div>
-</td>
+</div>

@@ -31,20 +31,12 @@ class Backgrid.SettingsCell extends Backgrid.Cell
     return this
 
   openMenu: (e) ->
-    $(".menu-settings").each(() ->
-      this.style.display = 'none'
-      )
+    $(".open").removeClass('open')
     menu = $(e.target).find(".menu-settings")
     if menu.length > 0
       menu[0].style.top = "-" + (menu.height() - $(e.target).height())/2 + "px"
-      menu[0].style.display = 'block'
+      menu.addClass("open")
     that = this
-
-  closeMenu: (e) ->
-    if !($(e.target).hasClass("menu-settings") or $(e.target).parents(".menu-settings").length > 0 or $(e.target).children(".menu-settings").length > 0)
-      $(".menu-settings").each(() ->
-        this.style.display = "none" 
-      )
 
   deleteRow: (e) ->
     if (window.confirm("Are you sure you want to delete this row?"))

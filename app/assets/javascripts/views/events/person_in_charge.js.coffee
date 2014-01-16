@@ -51,8 +51,8 @@ class Eventplanner.Views.PersonInCharge extends Backbone.View
     $(e.target).parent()[0].style.overflow = 'visible'
     menu = $(e.target).find(".menu-settings")
     if menu.length > 0
-      menu[0].style.display = 'block'
       menu[0].style.width = $(e.target).parent().width() + "px"
+      menu.addClass("open")
 
   syncContacts: () ->
     url = window.location.href.split("#")

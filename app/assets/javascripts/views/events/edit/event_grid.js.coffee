@@ -1,4 +1,4 @@
-class Eventplanner.Views.EventEdit extends Backbone.View
+class Eventplanner.Views.Events.Edit.EventGrid extends Backbone.View
   initialize: (options) ->
     @model = options.model
     @collection = new Eventplanner.Collections.Events()
@@ -21,18 +21,18 @@ class Eventplanner.Views.EventEdit extends Backbone.View
 
   gridColumns: [
     {}= 
-      name:     'name'
-      label:    'Name'
-      cell:     'string'
-      placeholder: 'Event Name'
-      width: 50
-      sortable: false
-    {}= 
       name:     'location'
       label:    'Location'
       cell:     'string'
       placeholder: 'Event Location'
       width: 25
+      sortable: false
+    {}= 
+      name:     'name'
+      label:    'Name'
+      cell:     'string'
+      placeholder: 'Event Name'
+      width: 50
       sortable: false
     {}= 
       name:     'date'

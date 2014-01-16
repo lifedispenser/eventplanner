@@ -1,4 +1,4 @@
-class Eventplanner.Views.Channel extends Backbone.View
+class Eventplanner.Views.Events.Edit.Channel extends Backbone.View
 
   events:
     "click" : "openMenu"

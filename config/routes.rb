@@ -4,10 +4,10 @@ Eventplanner::Application.routes.draw do
   post "mail/send_reminders" => "mail#reminder_email"
   post 'save_template' => 'events#save_template'
   post 'load_template' => 'events#load_template'
+  put 'users/:id' => "users#update", :as => :user
   get 'faq' => "home#faq"
   resources :events
   resources :items
-
 
   authenticated :user do
     root :to => 'home#index'
@@ -17,7 +17,7 @@ Eventplanner::Application.routes.draw do
   match 'users/contacts_sync' => 'users#contacts_sync'  
   match 'users/contacts' => 'users#contacts'  
   devise_for :users, :controllers => {:confirmations => "confirmations"}
-  resources :users  
+  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

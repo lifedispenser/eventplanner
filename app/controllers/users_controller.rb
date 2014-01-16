@@ -5,8 +5,41 @@ class UsersController < ApplicationController
   	@users = User.all
   end
 
-  def show    
+  def show
   	@user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+    respond_to do |format|
+      if @user.id != current_user.id
+        format.html { redirect_to '/events' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      elsif @user.update_attributes(params[:user].slice(*User.accessible_attributes.to_a))
+        notice = ''
+        if params[:user][:password]
+          sign_in(@user, :bypass => true)
+          notice = 'Password changed.'
+        else
+          notice = 'Successfully updated your information.'
+        end
+        format.html { 
+          flash[:notice] = notice
+          redirect_to '/events'
+        }
+        format.json { head :no_content }
+      else        
+        format.html { 
+          flash[:alert] = "There was a problem updating your password. Please try again."
+          redirect_to '/events'
+        }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def contacts
